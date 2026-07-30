@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Blue — Próximamente</title>
+    <meta name="description" content="Tu marca es una historia que merece ser contada. Diseño, branding y creación de contenido.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Amiri:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #e9e5dc;
+            --text-color: #03148eff;
+            --text-dim: rgba(3, 20, 142, 0.5);
+            --btn-bg: rgba(255, 255, 255, 0.4);
+            --btn-solid: #f2efea;
+            --btn-text: #03148eff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Lato', 'Open Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            /* Evita el scroll mientras la pantalla de próximamente esté activa */
+            overflow: hidden; 
+        }
+
+        /* --- PANTALLA DE PRÓXIMAMENTE --- */
+        #coming-soon {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #coming-soon h1 {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        #coming-soon p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
+        .btn-enter {
+            padding: 14px 28px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-enter:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Clase para ocultar la pantalla con transición */
+        .hidden-screen {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* --- CONTENIDO PRINCIPAL (BIO SITE) --- */
+        #app {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0; /* Oculto inicialmente para el efecto de entrada */
+            transform: translateY(20px);
+            transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+        }
+
+        /* Clase para mostrar el contenido cuando se quita el overlay */
+        .show-app {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .main-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 16px;
+        }
+
+        header {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        .header-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .photos-wrapper {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .photos-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-bio {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-color);
+            padding: 0 16px;
+            white-space: pre-line;
+        }
+
+        .socials-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+            width: 100%;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--btn-bg);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .social-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .links-section {
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        .scroll-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .link-card {
+            min-width: 140px;
+            flex: 1;
+            background-color: var(--btn-solid);
+            border-radius: 12px;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--text-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .link-thumbnail {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .link-description {
+            padding: 10px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .textbox-section {
+            width: 100%;
+            background-color: var(--btn-solid);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .textbox-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .textbox-desc {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        .watermark-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(0,0,0,0.05);
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 700;
+            transition: background-color 0.2s;
+        }
+
+        .watermark-btn:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA DE PRÓXIMAMENTE -->
+    <div id="coming-soon">
+        <h1>Studio Blue</h1>
+        <p>Estamos preparando algo increíble. Transformando ideas en realidades visuales impactantes.</p>
+        <button class="btn-enter" onclick="revealSite()">Ver un avance</button>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div id="app">
+        <div class="main-content">
+            
+            <header>
+                <h1 class="header-name">Studio Blue</h1>
+                <div class="photos-wrapper">
+                    <img src="https://media.bio.site/sites/f97192cb-fcd2-46fc-88cc-c57af8437359/bUAi6jNnJrtdVgsFBfoqoD.jpg" alt="Studio Blue Cover">
+                </div>
+                <p class="header-bio">Tu marca es una historia que merece ser contada. 
+Diseño, branding y creación de contenido para marcas auténticas y memorables.</p>
+            </header>
+
+            <section class="socials-container">
+                <a href="https://www.instagram.com/studioblue.design" target="_blank" class="social-icon" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.8503 0H7.14973C3.20735 0 0 3.20735 0 7.14973V16.8503C0 20.7926 3.20735 24 7.14973 24H16.8503C20.7926 24 24 20.7926 24 16.8503V7.14973C24 3.20735 20.7926 0 16.8503 0ZM21.5856 16.8503C21.5856 19.4655 19.4655 21.5856 16.8503 21.5856H7.14973C4.5345 21.5856 2.4144 19.4655 2.4144 16.8503V7.14973C2.4144 4.53446 4.5345 2.4144 7.14973 2.4144H16.8503C19.4655 2.4144 21.5856 4.53446 21.5856 7.14973V16.8503ZM12.0002 5.79297C8.57754 5.79297 5.79297 8.57754 5.79297 12.0002C5.79297 15.4228 8.57754 18.2074 12.0002 18.2074C15.4229 18.2074 18.2075 15.4229 18.2075 12.0002C18.2075 8.57749 15.4229 5.79297 12.0002 5.79297ZM12.0002 15.7931C9.90547 15.7931 8.20737 14.095 8.20737 12.0002C8.20737 9.90547 9.90551 8.20737 12.0002 8.20737C14.095 8.20737 15.7931 9.90547 15.7931 12.0002C15.7931 14.0949 14.0949 15.7931 12.0002 15.7931ZM19.7067 5.83895C19.7067 6.66041 19.0408 7.32633 18.2193 7.32633C17.3979 7.32633 16.7319 6.66041 16.7319 5.83895C16.7319 5.01749 17.3979 4.35156 18.2193 4.35156C19.0408 4.35156 19.7067 5.01749 19.7067 5.83895Z"/></svg>
+                </a>
+                <a href="mailto:holastudioblue@gmail.com" target="_blank" class="social-icon" aria-label="Email">
+                    <svg viewBox="0.26 0.21 17.3 14.04" fill="currentColor"><path d="M15.1293 0.210C16.4203 0.2104 17.552 1.2557 17.5687 2.5437C17.5688 2.5508 17.5698 2.5579 17.5698 2.565C17.5698 2.5682 17.5711 2.5722 17.5711 2.5753V11.827C17.5711 13.117 16.4343 14.2544 15.1293 14.2548H2.7051C1.3994 14.2548 0.262695 13.118 0.262695 11.827V2.5605C0.2628 2.5553 0.2639 2.5502 0.2641 2.545C0.2808 1.256 1.4135 0.210 2.7051 0.210H15.1293ZM2.0693 11.827C2.0693 12.1742 2.3573 12.4622 2.7051 12.4622H15.1293C15.4762 12.4619 15.7632 12.1739 15.7632 11.827V4.1475L9.4336 8.6438C9.1606 8.8378 8.8394 8.8378 8.5664 8.6438L2.2378 4.1463V11.827ZM2.7051 1.8578C2.4556 1.8578 2.2435 1.9932 2.1208 2.2142L8.9609 6.9695L15.7984 2.2142C15.676 1.9938 15.464 1.858 15.1293 1.8578H2.7051Z"/></svg>
+                </a>
+                <a href="https://wa.me/+34642020231" target="_blank" class="social-icon" aria-label="WhatsApp">
+                    <svg viewBox="0.54 0.5 19.9 20" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.5516 3.40805C15.6794 1.53588 13.1942 0.504752 10.5428 0.5C5.07831 0.5 0.635448 4.94761 0.630696 10.4073C0.630696 12.156 1.08686 13.8571 1.95167 15.3634L0.545166 20.5L5.80057 19.122C7.24985 19.9108 8.87969 20.3289 10.538 20.3289H10.5428C16.0025 20.3289 20.4501 15.8813 20.4549 10.4168C20.4549 7.77013 19.4238 5.28023 17.5516 3.40805ZM10.5428 18.6563C9.06025 18.6563 7.61098 18.2572 6.34702 17.5064L6.04766 17.3258L2.93053 18.1431L3.76208 15.102L3.56726 14.7884C2.74046 13.477 2.30805 11.9612 2.30805 10.4073C2.30805 5.8647 6.0049 2.17261 10.5475 2.17261C12.7476 2.17261 14.8146 3.03267 16.3732 4.58648C17.927 6.14505 18.7823 8.21205 18.7823 10.4121C18.7775 14.9595 15.0807 18.6563 10.5428 18.6563ZM15.0617 12.4838C14.8146 12.3603 13.5981 11.7616 13.3701 11.6761C13.142 11.5953 12.9757 11.5525 12.8141 11.7996C12.6478 12.0467 12.1726 12.6074 12.0301 12.7689C11.8875 12.9353 11.7402 12.9543 11.4931 12.8307C11.246 12.7072 10.4478 12.4458 9.50216 11.6C8.76565 10.9443 8.27147 10.1317 8.12416 9.88465C7.98161 9.63756 8.10991 9.50451 8.23345 9.38097C8.34274 9.27168 8.48054 9.09112 8.60409 8.94856C8.72763 8.80601 8.7704 8.70147 8.85118 8.53516C8.93196 8.36885 8.89394 8.2263 8.83217 8.10276C8.7704 7.97921 8.27622 6.75802 8.06714 6.26384C7.86757 5.77916 7.66325 5.84569 7.51119 5.84094C7.36864 5.83143 7.20233 5.83143 7.03602 5.83143C6.86971 5.83143 6.60361 5.89321 6.37553 6.1403C6.14745 6.38738 5.51072 6.9861 5.51072 8.20729C5.51072 9.42849 6.39929 10.6022 6.52283 10.7685C6.64638 10.9348 8.26671 13.4342 10.7519 14.5081C11.3411 14.7647 11.802 14.9167 12.1631 15.0308C12.7571 15.2208 13.294 15.1923 13.7217 15.1306C14.1969 15.0593 15.1852 14.5318 15.3943 13.9521C15.5986 13.3724 15.5986 12.8782 15.5369 12.7737C15.4751 12.6692 15.3088 12.6074 15.0617 12.4838Z"/></svg>
+                </a>
+                <a href="https://www.pinterest.com/holastudioblue/" target="_blank" class="social-icon" aria-label="Pinterest">
+                    <svg viewBox="3.07 1.53 12.98 16.77" fill="currentColor"><path d="M9.96439 1.53845C5.38578 1.53845 3.07692 4.82093 3.07692 7.5588C3.07692 9.21621 3.70443 10.6906 5.05011 11.2396C5.27085 11.3306 5.46868 11.243 5.53271 10.9987C5.5772 10.8302 5.68268 10.4035 5.72953 10.2252C5.79389 9.98359 5.76896 9.89933 5.59068 9.68803C5.20278 9.23071 4.9544 8.63824 4.9544 7.79841C4.9544 5.36318 6.77662 3.18306 9.69917 3.18306C12.2871 3.18306 13.7089 4.76431 13.7089 6.87568C13.7089 9.65466 12.4792 11.9999 10.6539 11.9999C9.64558 11.9999 8.89135 11.1665 9.13265 10.1437C9.42214 8.92268 9.98327 7.60564 9.98327 6.72369C9.98327 5.93508 9.55964 5.27724 8.68375 5.27724C7.65318 5.27724 6.82515 6.34354 6.82515 7.77145C6.82515 8.68104 7.1325 9.29642 7.1325 9.29642C7.1325 9.29642 6.07799 13.7652 5.89298 14.5477C5.52496 16.1064 5.83771 18.0166 5.86433 18.2093C5.87983 18.3239 6.02677 18.3515 6.0935 18.2653C6.1882 18.1409 7.41626 16.6257 7.83314 15.1112C7.95143 14.6829 8.51087 12.4626 8.51087 12.4626C8.84586 13.1016 9.82453 13.6631 10.8652 13.6631C13.9627 13.6631 16.0646 10.8393 16.0646 7.05935C16.0649 4.20049 13.6439 1.53845 9.96439 1.53845Z"/></svg>
+                </a>
+            </section>
+
+            <section class="links-section">
+                <div class="scroll-container">
+                    <a href="https://www.instagram.com/studioblue.design/p/DKQXRbatCnN/" target="_blank" class="link-card">
+                        <img class="link-thumbnail" src="https://media.bio.site/sites/f97192cb-fcd2-46fc-88cc-c57af8437359/GwraNfk6qBfZFAr7KKLbs8.jpg" alt="Social Media Portfolio">
+                        <div class="link-description">Social Media Portfolio</div>
+                    </a>
+                    <a href="https://www.instagram.com/p/DTv7WI1jgSR/" target="_blank" class="link-card">
+                        <img class="link-thumbnail" src="https://media.bio.site/sites/f97192cb-fcd2-46fc-88cc-c57af8437359/NawUbRvgidd4aepM6yQTy8.jpg" alt="Branding Portfolio">
+                        <div class="link-description">Branding Portfolio</div>
+                    </a>
+                    <a href="https://www.instagram.com/p/DBw8-bKRy1o/?img_index=1" target="_blank" class="link-card">
+                        <img class="link-thumbnail" src="https://media.bio.site/sites/f97192cb-fcd2-46fc-88cc-c57af8437359/pDjt9EPr2bfpuFGNukcnGA.jpg" alt="Servicios">
+                        <div class="link-description">Servicios</div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="textbox-section">
+                <div class="textbox-title">Sobre mi</div>
+                <div class="textbox-desc">Hola, soy Felipe Alfonzo, creador de Studio Blue. El azul es más que mi color favorito; es el color de la inmensidad. Me inspira a crear proyectos que, al igual que el océano y el cielo, reflejen confianza, serenidad y seguridad, transformando tus ideas en realidades visuales impactantes.</div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- SCRIPT PARA CONTROLAR LA PANTALLA -->
+    <script>
+        function revealSite() {
+            // Ocultamos la pantalla de próximamente
+            document.getElementById('coming-soon').classList.add('hidden-screen');
+            // Habilitamos el scroll del body
+            document.body.style.overflow = 'auto';
+            // Mostramos el contenido de la web con una animación
+            document.getElementById('app').classList.add('show-app');
+        }
+    </script>
+</body>
+</html>
