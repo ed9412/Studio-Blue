@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vancouver Signature</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fuentes para replicar el estilo -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;600&family=La+Belle+Aurore&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- MENÚ SUPERIOR -->
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="#">HOME</a>
+            <a href="#">ABOUT</a>
+            <a href="#">SHOP</a>
+        </nav>
+        <div class="logo">
+            <!-- Reemplaza con tu logo -->
+            <h2>(V)</h2> 
+        </div>
+        <nav class="nav-links right">
+            <a href="#">CONTACT</a>
+            <a href="#" class="cart-icon">🛒</a>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN HERO -->
+    <section class="hero slide-up">
+        <div class="hero-bg-text">LOREM IPSUM</div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <a href="#" class="shop-btn hover-slide">SHOP NOW</a>
+                <span class="vertical-text">2025 EDIT.</span>
+            </div>
+            <div class="hero-image">
+                <!-- Imagen principal -->
+                <img src="img/hero-model.jpg" alt="Modelo"> 
+            </div>
+            <div class="hero-right">
+                <h1 class="blue-text">VANCOUVER</h1>
+                <h2 class="script-text">Signature</h2>
+                <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CINTA DESLIZANTE (TICKER) -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            / COLLECTION / COLLECTION / COLLECTION / COLLECTION / COLLECTION / COLLECTION / COLLECTION / COLLECTION /
+        </div>
+    </div>
+
+    <!-- SECCIÓN PRODUCTOS -->
+    <section class="products slide-up">
+        <div class="product-grid">
+            <div class="product-card hover-slide">
+                <span class="tag">/ PRODUCT A</span>
+                <div class="cart-btn">🛒</div>
+            </div>
+            <div class="product-card hover-slide">
+                <span class="tag">/ PRODUCT B</span>
+                <div class="cart-btn">🛒</div>
+            </div>
+            <div class="product-card hover-slide">
+                <span class="tag">/ PRODUCT C</span>
+                <div class="cart-btn">🛒</div>
+            </div>
+            <div class="product-card image-card hover-slide" style="background-image: url('img/cap-quality.jpg');">
+                <span class="tag">/ QUALITY</span>
+            </div>
+            <div class="product-card image-card wide hover-slide" style="background-image: url('img/lookbook.jpg');">
+                <span class="tag">/ LOOKBOOK</span>
+            </div>
+        </div>
+        <div class="vertical-title">
+            <h1 class="blue-text-vertical">VANCOUVER</h1>
+            <h2 class="script-text-vertical">Signature</h2>
+        </div>
+    </section>
+
+    <!-- CINTA DESLIZANTE 2 -->
+    <div class="ticker-wrap dark">
+        <div class="ticker">
+            / ABOUT US / ABOUT US / ABOUT US / ABOUT US / ABOUT US / ABOUT US / ABOUT US / ABOUT US /
+        </div>
+    </div>
+
+    <!-- BRAND STORY -->
+    <section class="brand-story slide-up" style="background-image: url('img/brand-story.jpg');">
+        <div class="story-content">
+            <div class="story-left">
+                <h3>BRAND STORY</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie.</p>
+            </div>
+            <div class="story-center">
+                <h2 class="script-blue">le Petit Bleu CAFE</h2>
+            </div>
+            <div class="story-right">
+                <h3>VANCOUVER SIGNATURE</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.</p>
+            </div>
+        </div>
+        <a href="#" class="shop-btn-transparent hover-slide">SHOP NOW</a>
+    </section>
+
+    <!-- FEATURED LOOKS -->
+    <section class="featured-looks slide-up">
+        <div class="featured-bg">
+            <h1 class="blue-text">FEATURED LOOKS</h1>
+            <h2 class="script-text">Product name</h2>
+        </div>
+        <img src="img/featured.jpg" alt="Featured Look">
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer slide-up">
+        <div class="footer-logo">
+            <h2>(V)</h2>
+            <p class="small-text">Address address address address</p>
+        </div>
+        <div class="footer-links">
+            <div class="column">
+                <h4>STORES</h4>
+                <p>Address address address<br>Address address address<br>Address address address</p>
+            </div>
+            <div class="column">
+                <h4 class="blue-title">LOREM IPSUM</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <h4 class="blue-title">SOCIALS</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Email</a></li>
+                    <li><a href="#">Phone number</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT PARA ANIMACIONES DE DESLIZAMIENTO (SCROLL Y RATÓN) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animación al hacer scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.slide-up').forEach((el) => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
