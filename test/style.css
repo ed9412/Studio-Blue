@@ -79,17 +79,17 @@ img {
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 2rem 5% 0 5%; /* Se cambia el padding inferior a 0 para que choque con el banner azul */
-  align-items: flex-end;   /* Alinea los elementos al fondo (abajo) de la sección */
-  min-height: calc(100vh - 80px); /* Asegura un alto proporcional a la pantalla */
+  padding: 2rem 5% 0 5%;
+  align-items: flex-end;
+  min-height: calc(100vh - 80px);
 }
 
 .hero-content {
-  padding-bottom: 4rem; /* Mantiene espacio inferior para los textos y botón */
+  padding-bottom: 4rem;
 }
 
 .hero-content h1 {
-  font-size: clamp(2.2rem, 5vw, 3.5rem); /* Escala el texto fluidamente */
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 2.5rem;
@@ -114,19 +114,19 @@ img {
 /* --- AJUSTE Y ESCALADO DE LA IMAGEN HERO --- */
 .hero-image {
   display: flex;
-  justify-content: flex-start; /* Centrado / alineado a la izquierda del contenedor */
-  align-items: flex-end;       /* Pegado completamente abajo */
+  justify-content: flex-start;
+  align-items: flex-end;
   height: 100%;
   width: 100%;
 }
 
 .hero-image img {
   width: 100%;
-  max-width: 500px;           /* Límite máximo para pantallas muy grandes */
-  height: auto;               /* Mantiene la proporción natural de la foto */
-  max-height: 75vh;           /* Escala dinámicamente según la altura de la ventana */
-  object-fit: contain;        /* Muestra la imagen completa sin recortar */
-  object-position: bottom left; /* Asegura el anclaje abajo a la izquierda */
+  max-width: 500px;
+  height: auto;
+  max-height: 75vh;
+  object-fit: contain;
+  object-position: bottom left;
   display: block;
 }
 
@@ -158,42 +158,20 @@ img {
   width: 100%;
 }
 
-.services-text-cloud {
+/* --- ESTILOS DE LA IMAGEN PNG DE TEXTOS --- */
+.services-text-image {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
 }
 
-.services-text-cloud .row {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-}
-
-.services-text-cloud .row.right {
-  justify-content: flex-end;
-}
-
-.services-text-cloud .bold {
-  font-size: 2.8rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-.services-text-cloud .serif {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-}
-
-.services-text-cloud .italic-serif {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 3rem;
-}
-
-.services-text-cloud .small {
-  font-size: 0.75rem;
-  letter-spacing: 1px;
+.services-text-image img {
+  max-width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
 }
 
 /* --- LISTA DE SERVICIOS --- */
@@ -378,7 +356,7 @@ img {
   height: 28px;
   width: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* Convierte el logo a color blanco para destacar en el fondo oscuro */
+  filter: brightness(0) invert(1);
 }
 
 .footer-copy {
@@ -416,10 +394,6 @@ img {
 
   .statement-text h2 {
     font-size: 2.5rem;
-  }
-
-  .services-text-cloud .bold {
-    font-size: 1.8rem;
   }
 
   .photo-card {
