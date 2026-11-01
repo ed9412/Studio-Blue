@@ -4,7 +4,9 @@
   --bg-light: #f3f0ec;
   --text-dark: #111111;
   --brand-dark: #0d0d0d;
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  
+/* Definimos la nueva fuente */
+  --font-swiss: "Swiss 721 Extended BT", sans-serif;
   --font-serif: 'Instrument Serif', serif;
 }
 
@@ -15,9 +17,9 @@
 }
 
 body {
+  font-family: var(--font-swiss);
   background-color: var(--bg-light);
   color: var(--text-dark);
-  font-family: var(--font-sans);
   overflow-x: hidden;
 }
 
