@@ -134,24 +134,24 @@ img {
 .blue-banner {
   background-color: var(--blue-primary);
   color: #ffffff;
-  padding: 5rem 2%; /* Reducimos el padding lateral para dar máximo espacio al centro */
+  padding: 1.5rem 2%; /* Reducimos el padding superior e inferior para maximizar el área de la imagen */
   overflow: hidden;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .blue-banner-grid {
   display: grid;
-  /* La columna central se ajusta al ancho justo del PNG en lugar de expandirse */
   grid-template-columns: auto auto auto;
-  gap: 0.5rem; /* Pegadas al máximo (8px de separación) */
+  gap: 0.5rem; /* Se mantiene pegado al máximo */
   align-items: center;
   justify-content: center;
   max-width: 100%;
 }
 
 .photo-card {
-  width: 180px; /* Tamaño fijo ajustado para que no empujen hacia afuera */
+  width: 180px;
   flex-shrink: 0;
 }
 
@@ -161,6 +161,32 @@ img {
   max-height: 280px;
   width: 100%;
   object-fit: cover;
+}
+
+/* Desplazamiento de fotos laterales */
+.card-left {
+  transform: translateY(-20px);
+}
+
+.card-right {
+  transform: translateY(20px);
+}
+
+/* IMAGEN CENTRAL LO MÁS GRANDE POSIBLE */
+.services-text-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.services-text-image img {
+  width: 100%;
+  max-width: 850px;       /* Ampliamos el ancho máximo permitido */
+  height: auto;
+  max-height: 80vh;       /* Aumentamos la altura para que ocupe hasta el 80% del alto de pantalla */
+  object-fit: contain;
+  display: block;
 }
 
 /* Desplazamiento vertical de las tarjetas laterales */
