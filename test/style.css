@@ -153,7 +153,7 @@ img {
 .blue-banner {
   background-color: var(--blue-primary);
   color: #ffffff;
-  padding: 1.5rem 2%; /* Reducimos el padding superior e inferior para maximizar el área de la imagen */
+  padding: 1.5rem 2%;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -163,35 +163,40 @@ img {
 .blue-banner-grid {
   display: grid;
   grid-template-columns: auto auto auto;
-  gap: 0.5rem; /* Se mantiene pegado al máximo */
+  gap: 0.8rem;
   align-items: center;
   justify-content: center;
   max-width: 100%;
 }
 
+/* TAMAÑO MÁS GRANDE Y ADAPTATIVO EN PANTALLAS DE PC */
 .photo-card {
-  width: 180px;
+  width: clamp(220px, 22vw, 340px); /* Crece proporcionalmente en monitores medianos/grandes */
   flex-shrink: 0;
 }
 
 .photo-card img {
-  border-radius: 16px;
+  border-radius: 0;           /* Elimina las esquinas redondeadas/marco */
+  box-shadow: none;          /* Elimina cualquier sombra exterior */
+  border: none;              /* Asegura que no haya bordes definidos */
+  outline: none;             /* Elimina contornos de enfoque o selección */
   height: auto;
-  max-height: 280px;
+  max-height: 480px;
   width: 100%;
   object-fit: cover;
+  background: transparent;   /* Mantiene el fondo limpio */
 }
 
-/* Desplazamiento de fotos laterales */
+/* MANTIENE POSICIONAMIENTO ESCALONADO RESPECTO A TEXTO-SERVICIOS */
 .card-left {
-  transform: translateY(-20px);
+  transform: translateY(-35px); /* Aumentado ligeramente para compensar el mayor tamaño */
 }
 
 .card-right {
-  transform: translateY(20px);
+  transform: translateY(35px);
 }
 
-/* IMAGEN CENTRAL LO MÁS GRANDE POSIBLE */
+/* IMAGEN CENTRAL EN TAMAÑO MÁXIMO */
 .services-text-image {
   display: flex;
   justify-content: center;
@@ -201,65 +206,13 @@ img {
 
 .services-text-image img {
   width: 100%;
-  max-width: 850px;       /* Ampliamos el ancho máximo permitido */
+  max-width: 900px;
   height: auto;
-  max-height: 80vh;       /* Aumentamos la altura para que ocupe hasta el 80% del alto de pantalla */
+  max-height: 82vh;
   object-fit: contain;
   display: block;
 }
 
-/* Desplazamiento vertical de las tarjetas laterales */
-.card-left {
-  transform: translateY(-25px);
-}
-
-.card-right {
-  transform: translateY(25px);
-}
-
-/* Imagen central de texto */
-.services-text-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-}
-
-.services-text-image img {
-  width: 100%;
-  max-width: 650px;
-  height: auto;
-  max-height: 60vh;
-  object-fit: contain;
-  display: block;
-}
-
-/* Posicionamiento escalonado de las fotos laterales */
-.card-left {
-  transform: translateY(-25px); /* Branding Left más arriba */
-}
-
-.card-right {
-  transform: translateY(25px);  /* Branding Right más abajo */
-}
-
-/* IMAGEN PNG DE TEXTO (GRANDE Y RESPONSIVA) */
-.services-text-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 1rem 0;
-}
-
-.services-text-image img {
-  width: 100%;
-  max-width: 750px;
-  height: auto;
-  max-height: 60vh; /* Abarca gran parte del alto de la sección */
-  object-fit: contain;
-  display: block;
-}
 
 /* --- LISTA DE SERVICIOS --- */
 .services-list-section {
