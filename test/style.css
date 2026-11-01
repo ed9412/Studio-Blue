@@ -32,13 +32,18 @@ img {
   object-fit: cover;
 }
 
-/* --- NAVBAR --- */
+/* --- NAVBAR (HEADER FIJO AL HACER SCROLL) --- */
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 5%;
-  background: var(--bg-light);
+  padding: 1.5rem 5%;
+  background-color: var(--bg-light);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(8px);
 }
 
 .logo {
@@ -346,10 +351,16 @@ img {
   letter-spacing: 0.05em;
 }
 
-.footer-brand {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: #ffffff;
+.footer-logo {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Convierte el logo a color blanco para destacar en el fondo oscuro */
 }
 
 .footer-copy {
