@@ -134,23 +134,59 @@ img {
 .blue-banner {
   background-color: var(--blue-primary);
   color: #ffffff;
-  padding: 5rem 5%;
+  padding: 5rem 2%; /* Reducimos el padding lateral para dar máximo espacio al centro */
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .blue-banner-grid {
   display: grid;
-  grid-template-columns: minmax(160px, 220px) 1fr minmax(160px, 220px);
-  gap: 1rem; /* Imágenes más pegadas a la parte central */
+  /* La columna central se ajusta al ancho justo del PNG en lugar de expandirse */
+  grid-template-columns: auto auto auto;
+  gap: 0.5rem; /* Pegadas al máximo (8px de separación) */
   align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.photo-card {
+  width: 180px; /* Tamaño fijo ajustado para que no empujen hacia afuera */
+  flex-shrink: 0;
 }
 
 .photo-card img {
   border-radius: 16px;
   height: auto;
-  max-height: 320px;
+  max-height: 280px;
   width: 100%;
   object-fit: cover;
+}
+
+/* Desplazamiento vertical de las tarjetas laterales */
+.card-left {
+  transform: translateY(-25px);
+}
+
+.card-right {
+  transform: translateY(25px);
+}
+
+/* Imagen central de texto */
+.services-text-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.services-text-image img {
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  display: block;
 }
 
 /* Posicionamiento escalonado de las fotos laterales */
