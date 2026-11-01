@@ -130,21 +130,21 @@ img {
   color: #ffffff;
 }
 
-/* --- HERO IMAGE (FOTOGRAFÍA EN SU COLUMNA) --- */
+/* --- HERO IMAGE (AMPLIADA HASTA CASI EL BORDE SUPERIOR) --- */
 .hero-image {
   display: flex;
   justify-content: center;   /* Centrada horizontalmente en su columna */
-  align-items: flex-end;     /* Pegada al borde inferior */
+  align-items: flex-end;     /* Pegada al fondo de la sección */
   height: 100%;
   width: 100%;
 }
 
 .hero-image img {
   width: 100%;
-  max-width: 500px;
+  max-width: 650px;           /* Incrementado de 500px a 650px para dar mayor amplitud */
   height: auto;
-  max-height: 75vh;
-  object-fit: contain;
+  max-height: 89vh;           /* Permite que la imagen ocupe hasta el 92% de la altura visible */
+  object-fit: contain;        /* Mantiene las proporciones reales de la fotografía sin recortar */
   object-position: bottom center;
   display: block;
 }
