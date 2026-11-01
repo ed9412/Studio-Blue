@@ -75,32 +75,33 @@ img {
   padding-bottom: 2px;
 }
 
-/* --- HERO SECTION (CENTRADO HORIZONTAL) --- */
+/* --- HERO SECTION --- */
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 0 5%;
-  align-items: center;       /* Centrado vertical */
-  justify-items: center;    /* Centra las dos columnas horizontalmente en la cuadrícula */
+  align-items: center;       /* Centra verticalmente ambas columnas */
+  justify-items: center;    /* Centra horizontalmente cada columna dentro del grid */
   min-height: calc(100vh - 80px);
 }
 
+/* --- HERO CONTENT Y BOTÓN (ALINEADO A LA IZQUIERDA) --- */
 .hero-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;      /* Centra horizontalmente la imagen del texto y el botón */
-  text-align: center;
+  align-items: flex-start;  /* Alinea el botón y elementos a la izquierda */
   width: 100%;
+  max-width: 580px;         /* Ancho máximo alineado con la imagen del texto */
+  padding-bottom: 0;
 }
 
-/* IMAGEN PNG DEL TEXTO EN EL HERO */
+/* IMAGEN PNG DEL TEXTO PRINCIPAL */
 .hero-text-image {
   width: 100%;
-  max-width: 580px;
   margin-bottom: 2.5rem;
   display: flex;
-  justify-content: center;  /* Asegura el centrado interno del gráfico */
+  justify-content: center;   /* Gráfico centrado en su contenedor */
 }
 
 .hero-text-image img {
@@ -110,19 +111,30 @@ img {
   object-fit: contain;
 }
 
+/* BOTÓN CON BORDE OVALADO / PÍLDORA Y ALINEADO A LA IZQUIERDA */
 .btn-primary {
   display: inline-block;
-  border-bottom: 1.5px solid var(--text-dark);
-  padding-bottom: 4px;
-  font-size: 0.9rem;
+  border: 1.5px solid var(--text-dark);
+  border-radius: 999px;         /* Forma de píldora/óvalo perfecta */
+  padding: 0.6rem 1.6rem;
+  font-size: 0.85rem;
   font-weight: 600;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  background-color: transparent;
+  align-self: flex-start;      /* Anclaje a la izquierda */
 }
 
-/* --- HERO IMAGE (CENTRADA EN SU COLUMNA) --- */
+.btn-primary:hover {
+  background-color: var(--text-dark);
+  color: #ffffff;
+}
+
+/* --- HERO IMAGE (FOTOGRAFÍA EN SU COLUMNA) --- */
 .hero-image {
   display: flex;
-  justify-content: center;   /* Centra la imagen de la foto horizontalmente en su columna */
-  align-items: flex-end;     /* Mantiene el anclaje pegado al fondo */
+  justify-content: center;   /* Centrada horizontalmente en su columna */
+  align-items: flex-end;     /* Pegada al borde inferior */
   height: 100%;
   width: 100%;
 }
@@ -133,7 +145,7 @@ img {
   height: auto;
   max-height: 75vh;
   object-fit: contain;
-  object-position: bottom center; /* Centra el eje de la fotografía */
+  object-position: bottom center;
   display: block;
 }
 
