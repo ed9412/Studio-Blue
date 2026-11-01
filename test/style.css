@@ -79,28 +79,31 @@ img {
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 2rem 5% 0 5%;
-  align-items: flex-end;
+  padding: 0 5%;
+  align-items: center;       /* Centra verticalmente el contenido izquierdo y la imagen */
   min-height: calc(100vh - 80px);
 }
 
 .hero-content {
-  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* Mantiene el centrado vertical */
+  align-items: flex-start;   /* Alineado a la izquierda */
+  padding-bottom: 0;
 }
 
-.hero-content h1 {
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 2.5rem;
-  text-transform: uppercase;
+/* IMAGEN PNG DEL TEXTO EN EL HERO */
+.hero-text-image {
+  width: 100%;
+  max-width: 580px;          /* Ajusta el ancho máximo según las proporciones de tu PNG */
+  margin-bottom: 2.5rem;      /* Mantiene la distancia exacta con el botón */
 }
 
-.hero-content h1 em {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  text-transform: lowercase;
+.hero-text-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .btn-primary {
@@ -111,7 +114,7 @@ img {
   font-weight: 600;
 }
 
-/* --- HERO IMAGE (RESPONSIVA Y ANCLADA ABAJO) --- */
+/* --- HERO IMAGE (MANTIENE ANCLAJE ABAJO A LA IZQUIERDA) --- */
 .hero-image {
   display: flex;
   justify-content: flex-start;
