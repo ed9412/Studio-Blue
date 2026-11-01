@@ -111,7 +111,7 @@ img {
   font-weight: 600;
 }
 
-/* --- AJUSTE Y ESCALADO DE LA IMAGEN HERO --- */
+/* --- HERO IMAGE (RESPONSIVA Y ANCLADA ABAJO) --- */
 .hero-image {
   display: flex;
   justify-content: flex-start;
@@ -134,31 +134,35 @@ img {
 .blue-banner {
   background-color: var(--blue-primary);
   color: #ffffff;
-  padding: 4rem 5%;
-}
-
-.blue-banner .subtitle {
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  text-align: center;
-  margin-bottom: 2rem;
-  opacity: 0.9;
+  padding: 5rem 5%;
+  overflow: hidden;
 }
 
 .blue-banner-grid {
   display: grid;
-  grid-template-columns: 220px 1fr 220px;
-  gap: 2rem;
+  grid-template-columns: minmax(160px, 220px) 1fr minmax(160px, 220px);
+  gap: 1rem; /* Imágenes más pegadas a la parte central */
   align-items: center;
 }
 
 .photo-card img {
   border-radius: 16px;
-  height: 280px;
+  height: auto;
+  max-height: 320px;
   width: 100%;
+  object-fit: cover;
 }
 
-/* --- ESTILOS DE LA IMAGEN PNG DE TEXTOS --- */
+/* Posicionamiento escalonado de las fotos laterales */
+.card-left {
+  transform: translateY(-25px); /* Branding Left más arriba */
+}
+
+.card-right {
+  transform: translateY(25px);  /* Branding Right más abajo */
+}
+
+/* IMAGEN PNG DE TEXTO (GRANDE Y RESPONSIVA) */
 .services-text-image {
   display: flex;
   justify-content: center;
@@ -168,10 +172,12 @@ img {
 }
 
 .services-text-image img {
-  max-width: 100%;
+  width: 100%;
+  max-width: 750px;
   height: auto;
-  max-height: 280px;
+  max-height: 60vh; /* Abarca gran parte del alto de la sección */
   object-fit: contain;
+  display: block;
 }
 
 /* --- LISTA DE SERVICIOS --- */
@@ -202,6 +208,13 @@ img {
   color: #666;
 }
 
+.services-image img {
+  width: 100%;
+  height: auto;
+  max-height: 550px;
+  object-fit: cover;
+}
+
 /* --- BANNER AZUL STATEMENT --- */
 .blue-banner-statement {
   background-color: var(--blue-primary);
@@ -210,7 +223,7 @@ img {
 }
 
 .statement-text h2 {
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 800;
   line-height: 1;
   text-transform: uppercase;
@@ -229,6 +242,7 @@ img {
 .inline-photo img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .statement-desc {
@@ -302,6 +316,13 @@ img {
   padding: 5rem 5%;
   gap: 4rem;
   align-items: center;
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  max-height: 550px;
+  object-fit: cover;
 }
 
 .about-content h2 em {
@@ -392,11 +413,8 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .statement-text h2 {
-    font-size: 2.5rem;
-  }
-
-  .photo-card {
+  .card-left, .card-right {
+    transform: none; /* Desactiva el desplazamiento en móviles para mejor ajuste */
     display: none;
   }
 }
