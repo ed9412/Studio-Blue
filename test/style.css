@@ -75,28 +75,32 @@ img {
   padding-bottom: 2px;
 }
 
-/* --- HERO SECTION --- */
+/* --- HERO SECTION (CENTRADO HORIZONTAL) --- */
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 0 5%;
-  align-items: center;       /* Centra verticalmente el contenido izquierdo y la imagen */
+  align-items: center;       /* Centrado vertical */
+  justify-items: center;    /* Centra las dos columnas horizontalmente en la cuadrícula */
   min-height: calc(100vh - 80px);
 }
 
 .hero-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* Mantiene el centrado vertical */
-  align-items: flex-start;   /* Alineado a la izquierda */
-  padding-bottom: 0;
+  justify-content: center;
+  align-items: center;      /* Centra horizontalmente la imagen del texto y el botón */
+  text-align: center;
+  width: 100%;
 }
 
 /* IMAGEN PNG DEL TEXTO EN EL HERO */
 .hero-text-image {
   width: 100%;
-  max-width: 580px;          /* Ajusta el ancho máximo según las proporciones de tu PNG */
-  margin-bottom: 2.5rem;      /* Mantiene la distancia exacta con el botón */
+  max-width: 580px;
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: center;  /* Asegura el centrado interno del gráfico */
 }
 
 .hero-text-image img {
@@ -114,11 +118,11 @@ img {
   font-weight: 600;
 }
 
-/* --- HERO IMAGE (MANTIENE ANCLAJE ABAJO A LA IZQUIERDA) --- */
+/* --- HERO IMAGE (CENTRADA EN SU COLUMNA) --- */
 .hero-image {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
+  justify-content: center;   /* Centra la imagen de la foto horizontalmente en su columna */
+  align-items: flex-end;     /* Mantiene el anclaje pegado al fondo */
   height: 100%;
   width: 100%;
 }
@@ -129,7 +133,7 @@ img {
   height: auto;
   max-height: 75vh;
   object-fit: contain;
-  object-position: bottom left;
+  object-position: bottom center; /* Centra el eje de la fotografía */
   display: block;
 }
 
