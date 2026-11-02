@@ -4,6 +4,18 @@
   --bg-light: #f3f0ec;
   --text-dark: #111111;
   --brand-dark: #0d0d0d;
+
+/* --- REGISTRO DE FUENTE LOCAL --- */
+@font-face {
+  font-family: 'SWISS 721'; /* Nombre con el que llamarás a la fuente */
+  src: url('fonts/Swiss 721 Extended Regular.otf') format('otf'),
+  font-weight: 400; /* Peso normal */
+  font-style: normal;
+  font-display: swap; /* Permite cargar el texto rápido con fuente del sistema mientras descarga la propia */
+}
+
+
+  
   
 /* Definimos la nueva fuente */
   --font-swiss: "Swiss 721 BT V2", sans-serif;
