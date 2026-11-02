@@ -215,11 +215,12 @@ img {
   object-fit: contain;
 }
 
-/* --- BOTÓN PRINCIPAL Y ALINEACIÓN DEL ICONO --- */
+/* --- BOTÓN PRINCIPAL --- */
 .btn-primary {
-  display: inline-flex;       /* Fundamental para alinear texto e icono en la misma línea */
-  align-items: center;        /* Centra ambos verticalmente */
-  gap: 6px;                   /* Separación entre el texto y la flecha */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   border: 1.5px solid var(--text-dark);
   border-radius: 999px;
   padding: 0.6rem 1.6rem;
@@ -227,18 +228,21 @@ img {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-dark);
+  line-height: 1; /* CORRECCIÓN: Elimina el espacio invisible arriba/abajo del texto */
   transition: all 0.3s ease;
   background-color: transparent;
   align-self: flex-start;
 }
 
-/* Ajuste de tamaño y peso para el icono de Material Symbols */
+/* --- ICONO DEL BOTÓN --- */
 .btn-primary .material-symbols-outlined {
-  font-size: 1.15rem;         /* Ajusta el tamaño de la flecha para que no sea muy invasiva */
-  font-weight: 500;           /* Le da un poco más de cuerpo al trazo */
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1; /* CORRECCIÓN: Iguala la altura del icono con la del texto */
+  display: flex;  /* CORRECCIÓN: Convierte el icono en su propia caja flex para centrado perfecto */
+  align-items: center;
 }
 
-/* El icono heredará este cambio de color al hacer hover en el botón */
 .btn-primary:hover {
   background-color: var(--text-dark);
   color: #ffffff;
