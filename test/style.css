@@ -55,38 +55,122 @@ img {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 5%;
-  background-color: var(--bg-light);
+  background-color: var(--bg-light); /* Color sólido inicial */
+  transition: all 0.4s ease;         /* Transición suave para el tamaño y color */
+}
+
+/* EFECTO LIQUID GLASS (Estilo Apple) AL BAJAR POR LA WEB */
+.navbar.scrolled {
+  padding: 0.8rem 5%; /* Se hace menos alto */
+  /* Reemplaza '243, 240, 236' por el RGB exacto de tu --bg-light (#f3f0ec) */
+  background-color: rgba(243, 240, 236, 0.75); /* Ligeramente transparente */
+  backdrop-filter: blur(15px) saturate(180%);  /* Efecto cristal borroso */
+  -webkit-backdrop-filter: blur(15px) saturate(180%); /* Soporte para Safari/Apple */
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(8px);
 }
 
 .logo {
   display: flex;
   align-items: center;
+  z-index: 1001; /* Asegura que quede por encima del menú móvil */
 }
 
+/* El logo se adapta y cambia suavemente su tamaño */
 .logo img {
-  height: 35px;
+  height: clamp(28px, 4vw, 38px); 
   width: auto;
   object-fit: contain;
+  transition: height 0.4s ease;
 }
 
-.navbar nav ul {
+.navbar.scrolled .logo img {
+  height: clamp(24px, 3vw, 32px); /* Se hace un poco más pequeño al hacer scroll */
+}
+
+.nav-menu ul {
   display: flex;
   list-style: none;
   gap: 2.5rem;
   align-items: center;
 }
 
-.navbar nav a {
+.nav-menu a {
+  font-family: var(--font-custom);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 1px;
+  transition: color 0.3s ease;
 }
 
-.navbar nav a.active {
+.nav-menu a.active {
   border-bottom: 2px solid var(--text-dark);
   padding-bottom: 2px;
+}
+
+/* ESTILOS DEL BOTÓN HAMBURGUESA (Oculto en PC) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001; /* Por encima del menú para poder cerrarlo */
+}
+
+.menu-toggle span {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-dark);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* --- ADAPTACIÓN PARA MÓVILES --- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex; /* Muestra las 3 barritas en móviles */
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Oculto fuera de la pantalla por defecto */
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: var(--bg-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  /* Clase que se activa con JS para mostrar el menú */
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  /* Animación: Convierte las 3 barritas en una "X" al abrir el menú */
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0; /* Oculta la barrita central */
+  }
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
 }
 
 /* --- HERO SECTION --- */
@@ -262,44 +346,50 @@ img {
   max-height: 550px;
   object-fit: cover;
 }
-
 /* --- BANNER AZUL STATEMENT --- */
 .blue-banner-statement {
   background-color: var(--blue-primary);
   color: #ffffff;
   padding: 5rem 5%;
+  display: flex;
+  justify-content: center;    /* Centra el contenido horizontalmente */
+  align-items: center;        /* Centra el contenido verticalmente */
+  min-height: 90vh;           /* Hace que la sección ocupe casi toda la altura de la pantalla */
 }
 
-.statement-text h2 {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 800;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.inline-photo {
-  display: inline-block;
-  vertical-align: middle;
-  width: 120px;
-  height: 60px;
-  border-radius: 12px;
-  overflow: hidden;
-  margin: 0 10px;
-}
-
-.inline-photo img {
+.statement-wrapper {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 1100px;          /* Límite de ancho para que no se deforme en pantallas Ultra-Wide */
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* Centra la imagen dentro del contenedor */
+}
+
+.statement-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3.5rem;      /* Separación entre la imagen y el texto inferior */
+}
+
+.statement-image-container img {
+  width: 100%;
+  height: auto;
+  max-height: 65vh;           /* Ocupa la mayor parte de la sección sin desbordarse */
+  object-fit: contain;        /* Mantiene sus proporciones (responsivo) */
+  display: block;
 }
 
 .statement-desc {
-  margin-top: 2rem;
-  max-width: 500px;
-  font-size: 1.1rem;
-  line-height: 1.5;
+  width: 100%;
+  max-width: 600px;           /* Limita lo largo que puede llegar a ser el texto */
+  align-self: flex-start;     /* Empuja este bloque de texto hacia la izquierda */
+  text-align: left;           /* Alinea el texto a la izquierda */
+  font-size: 1.2rem;
+  line-height: 1.6;
   font-weight: 300;
 }
+
 
 /* --- CARRUSEL INFINITO DE LOGOS --- */
 .logo-carousel-section {

@@ -16,12 +16,20 @@
 </head>
 <body>
 
-  <!-- Navegación Fija sin Lupa -->
-  <header class="navbar">
+<!-- Navegación Fija Dinámica -->
+  <header class="navbar" id="navbar">
     <a href="#" class="logo">
       <img src="img/logos/logo-header.png" alt="Studio Blue Logo">
     </a>
-    <nav>
+    
+    <!-- Botón Hamburguesa para móviles -->
+    <button class="menu-toggle" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav-menu">
       <ul>
         <li><a href="#" class="active">HOME</a></li>
         <li><a href="#sobre-mi">SOBRE MÍ</a></li>
@@ -38,7 +46,7 @@
       <div class="hero-text-image">
         <img src="img/texto-hero.png" alt="Tu marca es una historia que merece ser contada">
       </div>
-      <a href="#contacto" class="btn-primary">Trabajemos juntos ↗</a>
+      <a href="#contacto" class="btn-primary">Trabajemos juntos &#x2197;&#xFE0E;</a>
     </div>
     <div class="hero-image">
       <img src="img/hero.png" alt="Felipe Alfonzo en Studio Blue">
@@ -88,23 +96,21 @@
     </div>
   </section>
 
-  <!-- Banner Azul: Marcas con huellas memorables -->
+<!-- Banner Azul: Marcas con huellas memorables -->
   <section class="blue-banner-statement">
-    <div class="statement-grid">
-      <div class="statement-text">
-        <h2>
-          MARCAS CON<br>
-          <span class="inline-photo">
-            <img src="img/memorable.png" alt="Trabajo creativo">
-          </span>
-          HUELLAS<br>
-          MEMORABLES
-        </h2>
+    <div class="statement-wrapper">
+      
+      <!-- Imagen principal (reemplaza el texto anterior) -->
+      <div class="statement-image-container">
+        <img src="img/marcas-memorables.png" alt="Marcas con huellas memorables">
       </div>
+      
+      <!-- Texto inferior justificado a la izquierda -->
+      <p class="statement-desc">
+        Ayudamos a transformar conceptos abstractos en realidades visuales, conectando marcas con su audiencia a través de su historia.
+      </p>
+
     </div>
-    <p class="statement-desc">
-      Ayudamos a transformar conceptos abstractos en realidades visuales, conectando marcas con su audiencia a través de su historia.
-    </p>
   </section>
 
   <!-- Carrusel Infinito de Logos de Trabajos Realizados -->
