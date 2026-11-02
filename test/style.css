@@ -215,20 +215,30 @@ img {
   object-fit: contain;
 }
 
-/* BOTÓN CON BORDE OVALADO / PÍLDORA Y ALINEADO A LA IZQUIERDA */
+/* --- BOTÓN PRINCIPAL Y ALINEACIÓN DEL ICONO --- */
 .btn-primary {
-  display: inline-block;
+  display: inline-flex;       /* Fundamental para alinear texto e icono en la misma línea */
+  align-items: center;        /* Centra ambos verticalmente */
+  gap: 6px;                   /* Separación entre el texto y la flecha */
   border: 1.5px solid var(--text-dark);
-  border-radius: 999px;         /* Forma de píldora/óvalo perfecta */
+  border-radius: 999px;
   padding: 0.6rem 1.6rem;
+  font-family: var(--font-custom);
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-dark);
   transition: all 0.3s ease;
   background-color: transparent;
-  align-self: flex-start;      /* Anclaje a la izquierda */
+  align-self: flex-start;
 }
 
+/* Ajuste de tamaño y peso para el icono de Material Symbols */
+.btn-primary .material-symbols-outlined {
+  font-size: 1.15rem;         /* Ajusta el tamaño de la flecha para que no sea muy invasiva */
+  font-weight: 500;           /* Le da un poco más de cuerpo al trazo */
+}
+
+/* El icono heredará este cambio de color al hacer hover en el botón */
 .btn-primary:hover {
   background-color: var(--text-dark);
   color: #ffffff;
