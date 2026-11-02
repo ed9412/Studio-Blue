@@ -28,12 +28,15 @@
   box-sizing: border-box;
 }
 
+
 body {
-  font-family: var(--font-swiss);
   background-color: var(--bg-light);
   color: var(--text-dark);
-  overflow-x: hidden;
+  font-family: var(--font-swiss);
+  font-weight: 400;
+  overflow-x: clip; /* 'clip' evita el scroll horizontal sin romper el comportamiento web */
 }
+
 
 a {
   text-decoration: none;
@@ -48,15 +51,17 @@ img {
 
 /* --- NAVBAR (HEADER FIJO AL HACER SCROLL) --- */
 .navbar {
-  position: sticky;
+  position: fixed; /* 100% infalible en todos los móviles */
   top: 0;
+  left: 0;
+  width: 100%;     /* Obligatorio al usar position: fixed */
   z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 5%;
-  background-color: var(--bg-light); /* Color sólido inicial */
-  transition: all 0.4s ease;         /* Transición suave para el tamaño y color */
+  background-color: var(--bg-light);
+  transition: all 0.4s ease;
 }
 
 /* EFECTO LIQUID GLASS (Estilo Apple) AL BAJAR POR LA WEB */
@@ -134,10 +139,11 @@ img {
     display: flex; /* Muestra las 3 barritas en móviles */
   }
 
-  .nav-menu {
+.nav-menu {
     position: fixed;
     top: 0;
-    right: -100%; /* Oculto fuera de la pantalla por defecto */
+    right: 0; /* Lo anclamos a la derecha... */
+    transform: translateX(100%); /* ...pero lo movemos invisiblemente fuera de la pantalla */
     width: 80%;
     max-width: 300px;
     height: 100vh;
@@ -146,14 +152,14 @@ img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: right 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+    transition: transform 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0); /* Animamos la propiedad transform */
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
     z-index: 1000;
   }
 
   /* Clase que se activa con JS para mostrar el menú */
   .nav-menu.active {
-    right: 0;
+    transform: translateX(0); /* Desliza el menú suavemente a su posición original */
   }
 
   .nav-menu ul {
@@ -177,10 +183,10 @@ img {
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 0 5%;
-  align-items: center;       /* Centra verticalmente ambas columnas */
-  justify-items: center;    /* Centra horizontalmente cada columna dentro del grid */
-  min-height: calc(100vh - 80px);
+  padding: 100px 5% 0 5%; /* Añadimos 100px arriba para compensar la barra fija */
+  align-items: center;
+  justify-items: center;
+  min-height: 100vh;
 }
 
 /* --- HERO CONTENT Y BOTÓN (ALINEADO A LA IZQUIERDA) --- */
