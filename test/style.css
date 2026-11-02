@@ -336,16 +336,24 @@ img {
 .services-list-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 5rem 5%;
-  gap: 4rem;
-  align-items: center;
+  background-color: #e6e5e1; /* Nuevo color de fondo */
+  padding: 0; /* Quitamos el padding global para que la imagen toque los bordes */
+  align-items: stretch; /* Permite que la imagen ocupe todo el alto vertical de la sección */
+}
+
+/* El espaciado se lo damos solo al contenedor del menú */
+.services-menu {
+  padding: 5rem 4rem 5rem 10%; /* 10% a la izquierda para alinear con el resto de la web, 4rem a la derecha para separar de la imagen */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .service-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #c8c5c0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15); /* Línea un poco más sutil que contraste con el nuevo fondo */
   padding: 1.5rem 0;
 }
 
@@ -360,12 +368,21 @@ img {
   color: #666;
 }
 
+/* --- IMAGEN JUSTIFICADA A LA DERECHA (A SANGRE) --- */
+.services-image {
+  width: 100%;
+  height: 100%;
+}
+
 .services-image img {
   width: 100%;
-  height: auto;
-  max-height: 550px;
-  object-fit: cover;
+  height: 100%; /* Obliga a la imagen a estirarse verticalmente para igualar al menú */
+  object-fit: cover; /* Evita que la imagen se deforme; la recorta elegantemente */
+  object-position: right center; /* Ancla el contenido importante de la imagen a la derecha */
+  display: block;
 }
+
+
 /* --- BANNER AZUL STATEMENT --- */
 .blue-banner-statement {
   background-color: var(--blue-primary);
@@ -565,8 +582,7 @@ img {
 /* --- RESPONSIVE / ADAPTACIÓN MÓVIL --- */
 @media (max-width: 900px) {
   .hero, 
-  .blue-banner-grid, 
-  .services-list-section, 
+  .blue-banner-grid,  
   .about-section {
     grid-template-columns: 1fr;
   }
@@ -574,5 +590,20 @@ img {
   .card-left, .card-right {
     transform: none; /* Desactiva el desplazamiento en móviles para mejor ajuste */
     display: none;
+  }
+
+  .services-list-section {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Ajustamos el padding para la pantalla pequeña */
+  .services-menu {
+    padding: 4rem 5%;
+  }
+
+  /* En móvil, le damos una altura fija a la imagen para que no quede gigante ni desaparezca */
+  .services-image img {
+    height: 45vh; /* Ocupará casi la mitad de la pantalla del móvil */
+    object-position: center; /* En móvil, mejor centrar el punto focal */
   }
 }
