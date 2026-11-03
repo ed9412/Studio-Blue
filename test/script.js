@@ -33,15 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- FUNCIONALIDAD DEL CARRUSEL INFINITO DE LOGOS (Existente) ---
+// --- FUNCIONALIDAD DEL CARRUSEL INFINITO DE LOGOS ---
   const logoTrack = document.querySelector(".logo-track");
+  
   if (logoTrack) {
-    const logos = Array.from(logoTrack.children);
-    logos.forEach((logo) => {
-      const clone = logo.cloneNode(true);
-      logoTrack.appendChild(clone);
-    });
+    // 1. Tomamos los 5 logos y los multiplicamos por 6 para cubrir cualquier pantalla
+    const logosHTML = logoTrack.innerHTML;
+    logoTrack.innerHTML = logosHTML.repeat(6);
 
+    // 2. Solo mantenemos la pausa cuando el usuario pone el cursor encima
     logoTrack.addEventListener("mouseenter", () => {
       logoTrack.style.animationPlayState = "paused";
     });
@@ -49,5 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     logoTrack.addEventListener("mouseleave", () => {
       logoTrack.style.animationPlayState = "running";
     });
+    
+    // (Hemos eliminado el bloque visibilitychange)
   }
 });

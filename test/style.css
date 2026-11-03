@@ -18,7 +18,7 @@
   
   
 /* Definimos la nueva fuente */
-  --font-swiss: "Swiss 721 Light";, sans-serif;
+  --font-swiss: "Swiss 721 Light", sans-serif;
   --font-serif: 'Instrument Serif', serif;
 }
 
@@ -445,7 +445,9 @@ img {
   display: flex;
   gap: 4rem;
   align-items: center;
-  animation: scroll 20s linear infinite;
+  width: max-content;
+  /* CAMBIO AQUÍ: de 20s a 60s para mantener la velocidad con la nueva longitud */
+  animation: scroll 60s linear infinite; 
   white-space: nowrap;
   will-change: transform;
 }
@@ -455,6 +457,7 @@ img {
   align-items: center;
   justify-content: center;
   min-width: 150px;
+  flex-shrink: 0; /* NUEVO: Evita que el navegador encoja los logos accidentalmente */
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0.85;
 }
@@ -484,21 +487,43 @@ img {
   }
 }
 
-/* --- SECCIÓN SOBRE MÍ --- */
+/* --- SECCIÓN SOBRE MÍ (PC) --- */
 .about-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 5rem 5%;
-  gap: 4rem;
-  align-items: center;
+  padding: 0; 
+  background-color: var(--bg-light);
+  align-items: stretch; 
+  min-height: 550px; /* NUEVO: Obliga a la sección a tener una altura decente para que la foto se vea bien */
+}
+
+.about-image {
+  position: relative; 
+  width: 100%;
+  height: 100%;
 }
 
 .about-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  max-height: 550px;
+  height: 100%;
   object-fit: cover;
+  /* NUEVO: Cambiamos 'center left' por 'center top' o 'center' para que priorice la parte superior (cara/torso) al recortar */
+  object-position: center top; 
+  display: block;
 }
+
+/* Espaciado del texto (reducido de 5rem a 4rem para que la sección sea menos alta) */
+.about-content {
+  padding: 4rem 10% 4rem 4rem; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 
 .about-content h2 em {
   font-family: var(--font-serif);
@@ -515,19 +540,44 @@ img {
   margin-bottom: 2rem;
 }
 
+/* --- BOTÓN SECUNDARIO (Sobre mí) --- */
 .btn-secondary {
-  display: inline-block;
-  border: 1px solid var(--text-dark);
-  padding: 0.5rem 1.2rem;
-  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1.5px solid var(--text-dark);
+  border-radius: 999px; /* Borde de píldora idéntico a la primera sección */
+  padding: 0.6rem 1.6rem;
+  font-family: var(--font-custom);
+  font-size: 0.85rem;
   font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1; 
+  transition: all 0.3s ease;
+  background-color: transparent;
+  /* Nota: No usamos align-self: flex-start aquí para que pueda centrarse automáticamente en la versión móvil */
+}
+
+/* Ajustes del icono para el botón secundario */
+.btn-secondary .material-symbols-outlined {
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.btn-secondary:hover {
+  background-color: var(--text-dark);
+  color: #ffffff;
 }
 
 /* --- FOOTER --- */
 .site-footer {
   background-color: var(--brand-dark);
   color: rgba(255, 255, 255, 0.8);
-  padding: 3rem 1.5rem;
+  padding: 1.5rem 5%;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -549,7 +599,7 @@ img {
 }
 
 .footer-logo img {
-  height: 28px;
+  height: 40px; /* Incrementado desde los 28px originales para darle más presencia */
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
@@ -583,8 +633,37 @@ img {
 @media (max-width: 900px) {
   .hero, 
   .blue-banner-grid,  
-  .about-section {
+.about-section {
     grid-template-columns: 1fr;
+    padding: 5rem 5%; /* Devolvemos el padding para que respire en móvil */
+    gap: 2.5rem;
+  }
+
+  /* Contenedor de la imagen centrado */
+  .about-image {
+    display: flex;
+    justify-content: center;
+    height: auto; /* Anula el estiramiento del PC */
+  }
+
+  /* Imagen estilo retrato de autor */
+.about-image img {
+    position: static; /* FUNDAMENTAL: Anula la posición absoluta del PC */
+    width: 100%;
+    max-width: 260px; 
+    height: auto;
+    aspect-ratio: 3/4; 
+    object-fit: cover;
+    object-position: center top; 
+    border-radius: 4px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
+  }
+
+  /* Ajustes del texto para móvil */
+  .about-content {
+    padding: 0; /* Anulamos el padding asimétrico del PC */
+    align-items: center; /* Centramos el contenido (título y botón) */
+    text-align: center; /* Centramos el texto para que haga juego con la foto de autor */
   }
 
   .card-left, .card-right {
