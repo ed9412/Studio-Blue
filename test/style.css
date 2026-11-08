@@ -629,6 +629,95 @@ img {
   }
 }
 
+/* --- CARRUSEL DE PORTAFOLIO (A SANGRE Y SIN HUECOS) --- */
+.portfolio-carousel-section {
+  position: relative;
+  width: 100%;
+  padding: 0; /* A sangre total, sin márgenes en la sección */
+  background-color: var(--brand-dark);
+  display: flex;
+  align-items: center;
+}
+
+.portfolio-slider {
+  width: 100%;
+  overflow: hidden; /* Esconde todo lo que se salga de la pantalla */
+}
+
+.portfolio-track {
+  display: flex;
+  width: max-content;
+  /* NO hay 'gap'. Esto hace que se peguen por completo */
+}
+
+.portfolio-item {
+  position: relative;
+  flex-shrink: 0;
+  width: 25vw;  /* En un PC mostrará 4 imágenes perfectas en pantalla (100 / 25) */
+  height: 55vh; /* Altura generosa de la fotografía */
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Suavidad extrema */
+  z-index: 1;
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Recorta adaptativamente sin deformar */
+  display: block;
+}
+
+/* Efecto de expansión (hover) */
+.portfolio-item:hover {
+  /* 👇 AQUÍ PUEDES MODIFICAR EL EFECTO DE EXPANSIÓN 👇
+     1.05 significa que crece un 5%. 
+     Si quieres que sea MUY notorio, cámbialo a 1.10 o 1.15. 
+     Si lo quieres muy sutil, pon 1.02. */
+  transform: scale(1.05); 
+  
+  z-index: 10; /* Lo pone por encima de las fotos vecinas al expandirse */
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4); /* Sombra elegante para despegarlo del fondo */
+}
+
+/* --- BOTONES DEL PORTAFOLIO (Círculos Liquid Glass) --- */
+.portfolio-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 60px; /* Tamaño del círculo */
+  height: 60px;
+  border-radius: 50%;
+  
+  /* 👇 Efecto Liquid Glass idéntico al menú 👇 */
+  background-color: rgba(243, 240, 236, 0.70); /* Color claro translúcido */
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%); /* Para Apple/iOS */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil brillante para simular cristal */
+  
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15); /* Sombra elegante */
+}
+
+.portfolio-btn:hover {
+  background-color: rgba(243, 240, 236, 0.95); /* Se vuelve más opaco al tocarlo */
+  transform: translateY(-50%) scale(1.08); 
+}
+
+.portfolio-btn .material-symbols-outlined {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.prev-btn { left: 2%; }
+.next-btn { right: 2%; }
+
+
+
 /* --- RESPONSIVE / ADAPTACIÓN MÓVIL --- */
 @media (max-width: 900px) {
   .hero, 
@@ -684,5 +773,23 @@ img {
   .services-image img {
     height: 45vh; /* Ocupará casi la mitad de la pantalla del móvil */
     object-position: center; /* En móvil, mejor centrar el punto focal */
+  }
+
+  /* Dentro de tu @media existente (actualizacion carrusel portafolio)*/ 
+  .portfolio-item {
+    width: 50vw; /* En tablets muestra 2 imágenes a la vez */
+    height: 40vh; /* Un poco menos alto */
+  }
+
+  @media (max-width: 500px) {
+    .portfolio-item {
+      width: 75vw; /* En móvil muestra 1 y un pedacito de otra para invitar a interactuar */
+      height: 35vh;
+    }
+    
+    .portfolio-btn {
+      width: 45px;
+      height: 45px;
+    }
   }
 }

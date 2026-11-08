@@ -52,4 +52,72 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // (Hemos eliminado el bloque visibilitychange)
   }
+
+
+  // --- FUNCIONALIDAD DEL CARRUSEL DE PORTAFOLIO ---
+  const portSlider = document.querySelector(".portfolio-slider");
+  const portTrack = document.querySelector(".portfolio-track");
+  const btnPrev = document.querySelector(".prev-btn");
+  const btnNext = document.querySelector(".next-btn");
+
+  if (portTrack && portSlider) {
+    // 1. Multiplicamos las fotos por 6 para el efecto infinito
+    const portHTML = portTrack.innerHTML;
+    portTrack.innerHTML = portHTML.repeat(6);
+    
+    // VARIABLES DE INERCIA (SMOOTH SCROLL)
+    let currentScroll = 0; // Dónde está la pantalla visualmente
+    let targetScroll = 0;  // Hacia dónde queremos ir
+    let baseSpeed = 0.398;   // Tu velocidad normal (puedes cambiarla)
+    let isPaused = false;
+    let animationId;
+
+    // 2. Motor matemático de inercia
+    function autoScrollPortfolio() {
+      // El "objetivo" siempre avanza poco a poco si no está pausado
+      if (!isPaused) {
+        targetScroll += baseSpeed;
+      }
+
+      // MAGIA DE SUAVIDAD (Línea de Easing): 
+      // La pantalla "persigue" al objetivo cerrando un 6% de la distancia por cada fotograma.
+      // Si quieres que sea MÁS suave y patine más, bájalo a 0.04. Si lo quieres más rápido, súbelo a 0.1
+      currentScroll += (targetScroll - currentScroll) * 0.04;
+
+      // 3. Reinicio infinito a prueba de fallos (calcula la mitad exacta de la pista)
+      const halfWidth = portTrack.scrollWidth / 2;
+
+      // Si nos pasamos hacia adelante, retrocedemos ambas variables a la vez sin que se note
+      if (currentScroll >= halfWidth) {
+        currentScroll -= halfWidth;
+        targetScroll -= halfWidth;
+      } 
+      // Si nos pasamos hacia atrás (al dar clics a la flecha izquierda), saltamos hacia adelante
+      else if (currentScroll <= 0 && targetScroll <= 0) {
+        currentScroll += halfWidth;
+        targetScroll += halfWidth;
+      }
+
+      // Aplicamos el movimiento final suavizado
+      portSlider.scrollLeft = currentScroll;
+      animationId = requestAnimationFrame(autoScrollPortfolio);
+    }
+    
+    autoScrollPortfolio(); // Iniciamos el motor
+
+    // 4. Pausar al pasar el ratón
+    portSlider.addEventListener("mouseenter", () => isPaused = true);
+    portSlider.addEventListener("mouseleave", () => isPaused = false);
+
+    // 5. Botones de Navegación Suavizada
+    const jumpAmount = 500; // Cantidad de píxeles que avanza por clic.
+
+    btnNext.addEventListener("click", () => {
+      targetScroll += jumpAmount; // Solo empujamos el objetivo, el motor se encarga de alcanzarlo suavemente
+    });
+
+    btnPrev.addEventListener("click", () => {
+      targetScroll -= jumpAmount;
+    });
+  }
 });
