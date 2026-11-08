@@ -68,7 +68,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // VARIABLES DE INERCIA (SMOOTH SCROLL)
     let currentScroll = 0; // Dónde está la pantalla visualmente
     let targetScroll = 0;  // Hacia dónde queremos ir
-    let baseSpeed = 0.398;   // Tu velocidad normal (puedes cambiarla)
+
+    // VARIABLES DINÁMICAS (PC vs MÓVIL)
+    let isMobile = window.innerWidth <= 900;
+    
+    // Si es móvil va a 0.3, si es PC va a 0.5
+    let baseSpeed = isMobile ? 0.3 : 0.398; 
+    
+    // Si es móvil salta 300px por clic, si es PC salta 600px
+    let jumpAmount = isMobile ? 300  : 600; 
+
+    // Recalcula automáticamente si el usuario gira el teléfono o redimensiona la ventana
+    window.addEventListener('resize', () => {
+      isMobile = window.innerWidth <= 900;
+      baseSpeed = isMobile ? 0.3 : 0.398; // Ajuste fino para que la velocidad se sienta igual en ambos dispositivos
+      jumpAmount = isMobile ? 300 : 600;
+    });
+
+
     let isPaused = false;
     let animationId;
 
@@ -110,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     portSlider.addEventListener("mouseleave", () => isPaused = false);
 
     // 5. Botones de Navegación Suavizada
-    const jumpAmount = 500; // Cantidad de píxeles que avanza por clic.
+
 
     btnNext.addEventListener("click", () => {
       targetScroll += jumpAmount; // Solo empujamos el objetivo, el motor se encarga de alcanzarlo suavemente
