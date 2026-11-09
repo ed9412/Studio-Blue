@@ -494,7 +494,7 @@ img {
 /* --- CARRUSEL INFINITO DE LOGOS --- */
 .logo-carousel-section {
   background-color: var(--bg-light);
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   overflow: hidden;
   border-bottom: 1px solid #e0ddd8;
 }
@@ -515,30 +515,49 @@ img {
   will-change: transform;
 }
 
+/* 1. Contenedor principal (quitamos el transform de aquí) */
 .logo-item {
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 150px;
-  flex-shrink: 0; /* NUEVO: Evita que el navegador encoja los logos accidentalmente */
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  flex-shrink: 0; 
+  transition: opacity 0.3s ease;
   opacity: 0.85;
 }
 
 .logo-item:hover {
-  transform: scale(1.08);
   opacity: 1;
 }
 
+/* 2. La imagen asume el control de la animación */
 .logo-item img {
-  max-height: 45px;
+  /* Le damos un tamaño base más grande para garantizar la máxima resolución */
+  max-height: 75px; 
   width: auto;
   filter: grayscale(100%);
-  transition: filter 0.3s ease;
+  
+  /* La encogemos en su estado normal (equivale a verla a 64px) */
+  transform: scale(0.85) translateZ(0);
+  -webkit-transform: scale(0.85) translateZ(0);
+  
+  /* Optimizaciones anti-desenfoque de máxima prioridad */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  will-change: transform, filter; /* Avisa al navegador que esto se va a mover */
+  
+  /* Animación más fluida */
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* 3. El estado hover (expansión) */
 .logo-item:hover img {
   filter: grayscale(0%);
+  /* Al pasar el ratón, vuelve a su escala real (1) en lugar de estirarse. 
+     Cero pérdida de resolución. */
+  transform: scale(1) translateZ(0);
+  -webkit-transform: scale(1) translateZ(0);
 }
 
 @keyframes scroll {
@@ -831,30 +850,17 @@ img {
   }
   
   /* 1. Pasamos el contenedor de la imagen al fondo */
-  .services-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0; /* Lo empuja detrás del texto */
-  }
-
-  /* 2. Hacemos que la imagen cubra el espacio y se ancle a la derecha */
+.services-image, 
   .services-image img {
-    width: 100%;
-    height: 100%; /* Copiará la altura de lo que mida tu texto */
-    object-fit: cover;
-    object-position: right center; /* Mantiene la parte visual a la derecha, dejando el blanco a la izquierda */
+    display: none;
   }
 
   /* 3. Ponemos el bloque de texto por encima */
   .services-menu {
-    position: relative; /* Requisito para que funcione el z-index */
-    z-index: 1; /* Lo levanta por encima de la foto */
-    background-color: transparent; /* Hace que el fondo de esta caja sea transparente para que se vea tu foto */
+  position: relative;
     padding: 4rem 5%;
-    min-height: 60vh; /* Le damos una altura mínima por si el texto es muy corto para que la foto se vea bien */
+    min-height: auto; /* Eliminamos el '60vh' que dejaba un hueco vacío por culpa de la foto */
+    background-color: transparent;
   }
 
   /* --- CAJA PROTECTORA DE TEXTO (SOLO EN MÓVILES) --- */
@@ -874,23 +880,7 @@ img {
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   }
 
-  /* --- CÁPSULAS LIQUID GLASS PARA TÍTULOS EN MÓVIL --- */
-  .service-header h2 {
-    background-color: rgba(243, 240, 236, 0.75); /* Fondo base claro */
-    backdrop-filter: blur(15px) saturate(180%);
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 0.3rem 1.2rem; /* Espaciado para crear la pastilla */
-    border-radius: 50px; /* Bordes completamente redondeados (estilo píldora) */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra muy sutil */
-    margin-right: 15px; /* Evita que choque visualmente con la flecha */
-  }
-
-  /* Ajuste de tamaño de fuente para pantallas de iPhone */
-  .service-header h2 em {
-    font-size: 2.2rem; /* Reducimos de los 3.5rem del PC para que no asfixie la pantalla */
-    line-height: 1; /* Centra el texto perfectamente dentro de la cápsula */
-  }
+  
 
   /* Dentro de tu @media existente (actualizacion carrusel portafolio)*/ 
   .portfolio-item {
