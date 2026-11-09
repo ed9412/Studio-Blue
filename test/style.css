@@ -962,15 +962,22 @@ img {
 
 /* --- BANNER STATEMENT (MÓVIL) --- */
   .statement-image-container .memorable-photo {
-    display: none !important; /* El !important aplasta cualquier otra orden, forzando que desaparezca */
+    display: none !important; 
   }
 
   .statement-image-container .memorable-text {
     width: 100% !important;
-    max-width: 100% !important; /* Devuelve la imagen del texto al tamaño completo de la pantalla */
+    max-width: 100% !important; 
   }
-.statement-desc {
+
+  /* El contenedor del texto vuelve a ocupar el 100% sin espacios forzados en móvil */
+  .statement-text-wrapper {
+    width: 100% !important;
+    padding-left: 0 !important;
+  }
+
+  .statement-desc {
     width: 100%;
-    margin-left: 0; 
+    margin-left: 0%;
   }
 }
