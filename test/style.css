@@ -197,7 +197,7 @@ img {
   justify-content: center;
   align-items: flex-start;  
   width: 100%;
-  max-width: 580px;         
+  max-width: 700px;         
   padding-bottom: 0;
   padding-right: 5%; /* Le damos un respiro para que el texto no choque con la foto en pantallas medianas */
 }
@@ -205,6 +205,7 @@ img {
 /* IMAGEN PNG DEL TEXTO PRINCIPAL */
 .hero-text-image {
   width: 100%;
+  max-width: 700px;
   margin-bottom: 2.5rem;
   display: flex;
   justify-content: center;   
@@ -420,7 +421,7 @@ img {
   font-size: 0.95rem;
   line-height: 1.6;
   color: #333;
-  text-align: left;
+  text-align: justify;
   margin: 0;
 }
 
@@ -613,6 +614,7 @@ img {
   line-height: 1.7;
   color: #333;
   margin-bottom: 2rem;
+  text-align: justify;
 }
 
 /* --- BOTÓN SECUNDARIO (Sobre mí) --- */
@@ -852,11 +854,17 @@ img {
     box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
   }
 
-  /* Ajustes del texto para móvil */
+/* Contenedor principal: Centra el título y el botón */
   .about-content {
-    padding: 0; /* Anulamos el padding asimétrico del PC */
-    align-items: center; /* Centramos el contenido (título y botón) */
-    text-align: center; /* Centramos el texto para que haga juego con la foto de autor */
+    padding: 0; 
+    align-items: center; 
+    text-align: center; 
+  }
+
+  /* Párrafo específico: Se justifica a la izquierda */
+  .about-content p {
+    text-align: justify;
+    width: 100%; /* Obliga al texto a expandirse hasta los bordes para alinearse correctamente */
   }
 
   .card-left, .card-right {
