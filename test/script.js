@@ -50,12 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let isMobileLogo = window.innerWidth <= 900;
     
     // Usamos las mismas velocidades exactas del portafolio
-    let baseSpeedLogo = isMobileLogo ? 0.36 : 0.398; 
+    let baseSpeedLogo = isMobileLogo ? 0.60 : 0.398; 
     let jumpAmountLogo = isMobileLogo ? 300 : 600; 
 
     window.addEventListener('resize', () => {
       isMobileLogo = window.innerWidth <= 900;
-      baseSpeedLogo = isMobileLogo ? 0.36 : 0.398;
+      baseSpeedLogo = isMobileLogo ? 0.60 : 0.398;
       jumpAmountLogo = isMobileLogo ? 300 : 600;
     });
 
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let isMobile = window.innerWidth <= 900;
     
     // Si es móvil va a 0.3, si es PC va a 0.5
-    let baseSpeed = isMobile ? 0.45 : 0.398; 
+    let baseSpeed = isMobile ? 0.60 : 0.398; 
     
     // Si es móvil salta 300px por clic, si es PC salta 600px
     let jumpAmount = isMobile ? 300  : 600; 
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Recalcula automáticamente si el usuario gira el teléfono o redimensiona la ventana
     window.addEventListener('resize', () => {
       isMobile = window.innerWidth <= 900;
-      baseSpeed = isMobile ? 0.45 : 0.398; // Ajuste fino para que la velocidad se sienta igual en ambos dispositivos
+      baseSpeed = isMobile ? 0.60 : 0.398; // Ajuste fino para que la velocidad se sienta igual en ambos dispositivos
       jumpAmount = isMobile ? 300 : 600;
     });
 
