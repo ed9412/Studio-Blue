@@ -461,43 +461,71 @@ img {
   color: #ffffff;
   padding: 5rem 5%;
   display: flex;
-  justify-content: center;    /* Centra el contenido horizontalmente */
-  align-items: center;        /* Centra el contenido verticalmente */
-  min-height: 90vh;           /* Hace que la sección ocupe casi toda la altura de la pantalla */
+  justify-content: center;    /* Centra horizontalmente todo lo que está dentro */
+  align-items: center;        /* Centra verticalmente */
+  min-height: 90vh;           
+  width: 100%;
 }
 
 .statement-wrapper {
   width: 100%;
-  max-width: 1100px;          /* Límite de ancho para que no se deforme en pantallas Ultra-Wide */
+  max-width: 1200px; /* Limita el ancho máximo para que no se pegue demasiado a los bordes de pantallas gigantes */
   display: flex;
-  flex-direction: column;
-  align-items: center;        /* Centra la imagen dentro del contenedor */
+  justify-content: center; /* Garantiza que el contenido interno se mueva al centro */
+  margin: 0 auto;          /* Centra automáticamente el envoltorio */
 }
 
+/* LA CAJA MAESTRA QUE CONTIENE FOTOS Y TEXTO */
+.statement-content-box {
+  width: 100%;
+  max-width: 1000px;       /* Ancho total de tu diseño */
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* CAMBIO CLAVE: Fuerza a que los elementos internos (como el bloque de texto con su margen) se centren globalmente como un solo bloque */
+}
+
+/* CONTENEDOR DE IMÁGENES */
 .statement-image-container {
   width: 100%;
   display: flex;
-  justify-content: center;
-  margin-bottom: 3.5rem;      /* Separación entre la imagen y el texto inferior */
+  align-items: center;
+  justify-content: center; /* Centra las imágenes dentro de su propia franja */
+  margin-bottom: 3.5rem;      
 }
 
-.statement-image-container img {
-  width: 100%;
+/* 3. LAS IMÁGENES OCUPAN EL 100% REAL SIN ESPACIOS TRANSPARENTES */
+.statement-image-container .memorable-photo {
+  width: 22.5%; /* Modifica este porcentaje si quieres cambiar proporciones */
   height: auto;
-  max-height: 65vh;           /* Ocupa la mayor parte de la sección sin desbordarse */
-  object-fit: contain;        /* Mantiene sus proporciones (responsivo) */
-  display: block;
+  object-fit: cover; 
+  object-position: center right; 
 }
 
+.statement-image-container .memorable-text {
+  width: 65%; /* Modifica este porcentaje si quieres cambiar proporciones */
+  height: auto;
+  object-fit: contain;
+  object-position: center left;
+}
+
+.statement-text-wrapper {
+  width: 50%;          /* Ocupa la mitad exacta bajo las imágenes */
+  align-self: flex-start; /* Se alinea con el inicio de la imagen "memorable" */
+  padding-left: 2rem;  /* 👈 AQUÍ CONTROLAS EL MARGEN: Un espacio limpio y responsivo a la izquierda */
+  box-sizing: border-box; /* Asegura que el padding no rompa el ancho del 50% */
+}
+
+/* 4. EL TEXTO SE ALINEA A LA PERFECCIÓN */
 .statement-desc {
-  width: 100%;
-  max-width: 600px;           /* Limita lo largo que puede llegar a ser el texto */
-  align-self: flex-start;     /* Empuja este bloque de texto hacia la izquierda */
-  text-align: left;           /* Alinea el texto a la izquierda */
+  width: 100%;         /* Llena su caja contenedora (el 50%) */
+  margin: 0;           /* Sin márgenes raros */
+  text-align: justify;           
   font-size: 1.2rem;
   line-height: 1.6;
   font-weight: 300;
+  margin-left: 10%;
 }
+
 
 
 /* --- CARRUSEL INFINITO DE LOGOS --- */
@@ -929,5 +957,20 @@ img {
       width: 45px;
       height: 45px;
     }
+  }
+
+
+/* --- BANNER STATEMENT (MÓVIL) --- */
+  .statement-image-container .memorable-photo {
+    display: none !important; /* El !important aplasta cualquier otra orden, forzando que desaparezca */
+  }
+
+  .statement-image-container .memorable-text {
+    width: 100% !important;
+    max-width: 100% !important; /* Devuelve la imagen del texto al tamaño completo de la pantalla */
+  }
+.statement-desc {
+    width: 100%;
+    margin-left: 0; 
   }
 }
