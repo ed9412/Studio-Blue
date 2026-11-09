@@ -183,21 +183,23 @@ img {
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 100px 5% 0 5%; /* Añadimos 100px arriba para compensar la barra fija */
+  /* CAMBIO: Eliminamos el 5% de la derecha y dejamos 0 abajo para lograr el "a sangre" */
+  padding: 100px 0 0 5%; 
   align-items: center;
   justify-items: center;
   min-height: 100vh;
 }
 
-/* --- HERO CONTENT Y BOTÓN (ALINEADO A LA IZQUIERDA) --- */
+/* --- HERO CONTENT Y BOTÓN --- */
 .hero-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;  /* Alinea el botón y elementos a la izquierda */
+  align-items: flex-start;  
   width: 100%;
-  max-width: 580px;         /* Ancho máximo alineado con la imagen del texto */
+  max-width: 580px;         
   padding-bottom: 0;
+  padding-right: 5%; /* Le damos un respiro para que el texto no choque con la foto en pantallas medianas */
 }
 
 /* IMAGEN PNG DEL TEXTO PRINCIPAL */
@@ -205,7 +207,7 @@ img {
   width: 100%;
   margin-bottom: 2.5rem;
   display: flex;
-  justify-content: center;   /* Gráfico centrado en su contenedor */
+  justify-content: center;   
 }
 
 .hero-text-image img {
@@ -228,18 +230,17 @@ img {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-dark);
-  line-height: 1; /* CORRECCIÓN: Elimina el espacio invisible arriba/abajo del texto */
+  line-height: 1; 
   transition: all 0.3s ease;
   background-color: transparent;
   align-self: flex-start;
 }
 
-/* --- ICONO DEL BOTÓN --- */
 .btn-primary .material-symbols-outlined {
   font-size: 1.15rem;
   font-weight: 500;
-  line-height: 1; /* CORRECCIÓN: Iguala la altura del icono con la del texto */
-  display: flex;  /* CORRECCIÓN: Convierte el icono en su propia caja flex para centrado perfecto */
+  line-height: 1; 
+  display: flex;  
   align-items: center;
 }
 
@@ -248,10 +249,10 @@ img {
   color: #ffffff;
 }
 
-/* --- HERO IMAGE (AMPLIADA HASTA CASI EL BORDE SUPERIOR) --- */
+/* --- HERO IMAGE (A SANGRE DERECHA) --- */
 .hero-image {
   display: flex;
-  justify-content: center;   /* Centrada horizontalmente en su columna */
+  justify-content: flex-end; /* CAMBIO: Empuja la imagen contra el borde derecho */
   align-items: flex-end;     /* Pegada al fondo de la sección */
   height: 100%;
   width: 100%;
@@ -259,11 +260,11 @@ img {
 
 .hero-image img {
   width: 100%;
-  max-width: 650px;           /* Incrementado de 500px a 650px para dar mayor amplitud */
+  max-width: 850px;           /* Aumentado para que tenga más impacto visual */
   height: auto;
-  max-height: 89vh;           /* Permite que la imagen ocupe hasta el 92% de la altura visible */
-  object-fit: contain;        /* Mantiene las proporciones reales de la fotografía sin recortar */
-  object-position: bottom center;
+  max-height: 90vh;           
+  object-fit: contain;        
+  object-position: bottom right; /* CAMBIO CLAVE: Ancla la imagen abajo y a la derecha */
   display: block;
 }
 
@@ -514,8 +515,6 @@ img {
   /* ELIMINADO: Hemos quitado "animation: scroll 60s" y "will-change: transform" porque ahora lo mueve JS */
 }
 
-/* (Puedes borrar también el bloque de @keyframes scroll {...} si quieres limpiar el código) */
-
 /* 1. Contenedor principal (quitamos el transform de aquí) */
 .logo-item {
   display: flex;
@@ -754,7 +753,7 @@ img {
   box-shadow: 0 15px 40px rgba(0,0,0,0.4); /* Sombra elegante para despegarlo del fondo */
 }
 
-/* --- BOTONES DEL PORTAFOLIO (Círculos Liquid Glass) --- */
+/* --- BOTONES DEL PORTAFOLIO Y LOGOS(Círculos Liquid Glass) --- */
 .portfolio-btn {
   position: absolute;
   top: 50%;
@@ -796,13 +795,42 @@ img {
 
 /* --- RESPONSIVE / ADAPTACIÓN MÓVIL --- */
 @media (max-width: 900px) {
-  .hero, 
+ 
+  /* Mantenemos el padding general para estas dos secciones */
   .blue-banner-grid,  
-.about-section {
+  .about-section {
     grid-template-columns: 1fr;
-    padding: 5rem 5%; /* Devolvemos el padding para que respire en móvil */
+    padding: 5rem 5%; 
     gap: 2.5rem;
   }
+
+  /* Ajustes específicos para el Hero en móvil (Imagen a sangre) */
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 7rem 0 0 0; /* 0 a los lados y 0 abajo para que la foto sangre */
+    gap: 1.5rem;
+  }
+
+  .hero-content {
+    padding: 0 5%; /* Devolvemos el margen de seguridad exclusivamente al bloque de texto */
+    align-items: center; /* Centramos el texto en móvil para mayor simetría */
+  }
+
+  .btn-primary {
+    align-self: center; /* Centra el botón en móvil */
+  }
+
+  .hero-image {
+    justify-content: flex-end; /* Mantiene la imagen recostada a la derecha */
+  }
+  
+  .hero-image img {
+    width: 90%; /* Hace la foto un poco más pequeña para que no se coma toda la pantalla */
+    max-width: 450px;
+    object-position: bottom right;
+  }
+  
+
 
   /* Contenedor de la imagen centrado */
   .about-image {
@@ -871,7 +899,7 @@ img {
     border-radius: 12px;
     padding: 1.5rem;
     margin-top: 1rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: none;
   }
 
   
