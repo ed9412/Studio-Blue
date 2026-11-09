@@ -137,4 +137,29 @@ document.addEventListener("DOMContentLoaded", () => {
       targetScroll -= jumpAmount;
     });
   }
+
+// --- FUNCIONALIDAD DEL ACORDEÓN DE SERVICIOS ---
+  const accordionItems = document.querySelectorAll('.service-item'); // Busca la clase correcta
+
+  accordionItems.forEach(item => {
+    // Detectamos el clic en toda la zona del título + botón
+    const header = item.querySelector('.service-header');
+    
+    header.addEventListener('click', () => {
+      const isOpen = item.classList.contains('active');
+
+      // OPCIONAL: Cierra todos los demás ítems antes de abrir el nuevo
+      accordionItems.forEach(otherItem => {
+        otherItem.classList.remove('active');
+        otherItem.querySelector('.service-toggle-btn').setAttribute('aria-expanded', 'false');
+      });
+
+      // Si no estaba abierto, lo abrimos
+      if (!isOpen) {
+        item.classList.add('active');
+        item.querySelector('.service-toggle-btn').setAttribute('aria-expanded', 'true');
+      } 
+    });
+  });
+  
 });
