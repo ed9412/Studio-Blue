@@ -644,6 +644,10 @@ img {
   margin-bottom: 1.5rem;
 }
 
+.about-content h2 em .brand-name {
+  white-space: nowrap; /* "Studio Blue" nunca se separa */
+}
+
 .about-content p {
   font-size: 0.95rem;
   line-height: 1.7;
@@ -980,4 +984,9 @@ img {
     width: 100%;
     margin-left: 0%;
   }
+
+.about-content h2 em .brand-name {
+  display: block; /* "Studio Blue" siempre baja a la segunda línea */
+}
+
 }
