@@ -34,23 +34,77 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 // --- FUNCIONALIDAD DEL CARRUSEL INFINITO DE LOGOS ---
+  const logoSlider = document.querySelector(".logo-slider");
   const logoTrack = document.querySelector(".logo-track");
-  
-  if (logoTrack) {
-    // 1. Tomamos los 5 logos y los multiplicamos por 6 para cubrir cualquier pantalla
+  const logoBtnPrev = document.querySelector(".logo-prev-btn");
+  const logoBtnNext = document.querySelector(".logo-next-btn");
+
+  if (logoTrack && logoSlider) {
+    // 1. Multiplicamos los logos por 6 para cubrir la pantalla
     const logosHTML = logoTrack.innerHTML;
     logoTrack.innerHTML = logosHTML.repeat(6);
 
-    // 2. Solo mantenemos la pausa cuando el usuario pone el cursor encima
-    logoTrack.addEventListener("mouseenter", () => {
-      logoTrack.style.animationPlayState = "paused";
+    // VARIABLES DE INERCIA INDEPENDIENTES PARA LOGOS
+    let currentScrollLogo = 0;
+    let targetScrollLogo = 0;
+    let isMobileLogo = window.innerWidth <= 900;
+    
+    // Usamos las mismas velocidades exactas del portafolio
+    let baseSpeedLogo = isMobileLogo ? 0.36 : 0.398; 
+    let jumpAmountLogo = isMobileLogo ? 300 : 600; 
+
+    window.addEventListener('resize', () => {
+      isMobileLogo = window.innerWidth <= 900;
+      baseSpeedLogo = isMobileLogo ? 0.36 : 0.398;
+      jumpAmountLogo = isMobileLogo ? 300 : 600;
     });
 
-    logoTrack.addEventListener("mouseleave", () => {
-      logoTrack.style.animationPlayState = "running";
+    let isPausedLogo = false;
+
+    // 2. Motor matemático (idéntico al del portafolio)
+    function autoScrollLogos() {
+      if (!isPausedLogo) {
+        targetScrollLogo += baseSpeedLogo;
+      }
+
+      currentScrollLogo += (targetScrollLogo - currentScrollLogo) * 0.04;
+
+      const halfWidthLogo = logoTrack.scrollWidth / 2;
+
+      if (currentScrollLogo >= halfWidthLogo) {
+        currentScrollLogo -= halfWidthLogo;
+        targetScrollLogo -= halfWidthLogo;
+      } else if (currentScrollLogo <= 0 && targetScrollLogo <= 0) {
+        currentScrollLogo += halfWidthLogo;
+        targetScrollLogo += halfWidthLogo;
+      }
+
+      logoSlider.scrollLeft = currentScrollLogo;
+      requestAnimationFrame(autoScrollLogos);
+    }
+    
+    autoScrollLogos();
+
+    // 3. Pausar al pasar el ratón
+    logoSlider.addEventListener("mouseenter", () => {
+      isPausedLogo = true;
+      targetScrollLogo = currentScrollLogo; // Esto iguala las variables y mata el "derrape" al instante
     });
     
-    // (Hemos eliminado el bloque visibilitychange)
+    logoSlider.addEventListener("mouseleave", () => {
+      isPausedLogo = false;
+    });
+
+    // 4. Funcionalidad de las flechas
+    if (logoBtnNext && logoBtnPrev) {
+      logoBtnNext.addEventListener("click", () => {
+        targetScrollLogo += jumpAmountLogo;
+      });
+
+      logoBtnPrev.addEventListener("click", () => {
+        targetScrollLogo -= jumpAmountLogo;
+      });
+    }
   }
 
 

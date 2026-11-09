@@ -493,6 +493,7 @@ img {
 
 /* --- CARRUSEL INFINITO DE LOGOS --- */
 .logo-carousel-section {
+  position: relative; /* AÑADIDO: Fundamental para que las flechas se ubiquen bien */
   background-color: var(--bg-light);
   padding: 2.5rem 0;
   overflow: hidden;
@@ -502,6 +503,7 @@ img {
 .logo-slider {
   width: 100%;
   display: flex;
+  overflow: hidden; /* AÑADIDO: Oculta lo que desborda para que JS pueda hacer scroll */
 }
 
 .logo-track {
@@ -509,11 +511,10 @@ img {
   gap: 4rem;
   align-items: center;
   width: max-content;
-  /* CAMBIO AQUÍ: de 20s a 60s para mantener la velocidad con la nueva longitud */
-  animation: scroll 60s linear infinite; 
-  white-space: nowrap;
-  will-change: transform;
+  /* ELIMINADO: Hemos quitado "animation: scroll 60s" y "will-change: transform" porque ahora lo mueve JS */
 }
+
+/* (Puedes borrar también el bloque de @keyframes scroll {...} si quieres limpiar el código) */
 
 /* 1. Contenedor principal (quitamos el transform de aquí) */
 .logo-item {
@@ -560,14 +561,7 @@ img {
   -webkit-transform: scale(1) translateZ(0);
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
+
 
 /* --- SECCIÓN SOBRE MÍ (PC) --- */
 .about-section {
