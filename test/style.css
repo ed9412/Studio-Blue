@@ -881,7 +881,7 @@ img {
   
 /* --- BANNER STATEMENT (MÓVIL) ESPACIADOS --- */
   .blue-banner-statement {
-    padding: 2.5rem 5%; /* Mucho menos espacio arriba y abajo en móvil */
+    padding: 3.5rem 5%; /* Mucho menos espacio arriba y abajo en móvil */
     min-height: auto;   /* Anula la regla de altura mínima para que la caja abrace al contenido */
   }
 
