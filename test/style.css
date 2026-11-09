@@ -874,6 +874,24 @@ img {
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   }
 
+  /* --- CÁPSULAS LIQUID GLASS PARA TÍTULOS EN MÓVIL --- */
+  .service-header h2 {
+    background-color: rgba(243, 240, 236, 0.75); /* Fondo base claro */
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0.3rem 1.2rem; /* Espaciado para crear la pastilla */
+    border-radius: 50px; /* Bordes completamente redondeados (estilo píldora) */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra muy sutil */
+    margin-right: 15px; /* Evita que choque visualmente con la flecha */
+  }
+
+  /* Ajuste de tamaño de fuente para pantallas de iPhone */
+  .service-header h2 em {
+    font-size: 2.2rem; /* Reducimos de los 3.5rem del PC para que no asfixie la pantalla */
+    line-height: 1; /* Centra el texto perfectamente dentro de la cápsula */
+  }
+
   /* Dentro de tu @media existente (actualizacion carrusel portafolio)*/ 
   .portfolio-item {
     width: 50vw; /* En tablets muestra 2 imágenes a la vez */
