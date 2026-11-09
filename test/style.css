@@ -28,6 +28,13 @@
   box-sizing: border-box;
 }
 
+html {
+  /* Le dice al navegador que se detenga 90px antes al hacer clic en un enlace del menú */
+  scroll-padding-top: 100px; 
+  
+  /* Hace que el desplazamiento al hacer clic sea un viaje suave y no un salto brusco */
+  scroll-behavior: smooth; 
+}
 
 body {
   background-color: var(--bg-light);

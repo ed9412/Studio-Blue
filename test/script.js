@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  
   
   // --- NAVEGACIÓN: EFECTO LIQUID GLASS AL HACER SCROLL ---
   const navbar = document.querySelector(".navbar");
@@ -32,6 +34,57 @@ document.addEventListener("DOMContentLoaded", () => {
       navMenu.classList.remove("active");
     });
   });
+
+
+
+  // 1. Filtramos solo los enlaces internos que empiezan por '#' (ignora enlaces externos como contacto.html)
+  const internalLinks = Array.from(navLinks).filter(link => {
+    const href = link.getAttribute('href');
+    return href && (href.startsWith('#') || href === '#');
+  });
+
+  // 2. Buscamos las secciones correspondientes en el HTML
+  const sections = internalLinks
+    .map(link => {
+      const href = link.getAttribute('href');
+      if (href === '#' || href === '#home') return document.querySelector('#home') || document.querySelector('.hero');
+      return document.querySelector(href);
+    })
+    .filter(section => section !== null);
+
+  // 3. Configuramos el observador para detectar qué sección está en el centro de la pantalla
+  const observerOptions = {
+    root: null,
+    rootMargin: '-30% 0px -50% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Quitamos la clase 'active' de todos los enlaces
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        const id = entry.target.getAttribute('id');
+        let activeLink;
+
+        // Identificamos el enlace correcto basado en el ID de la sección visible
+        if (id === 'home' || entry.target.classList.contains('hero')) {
+          activeLink = document.querySelector('.nav-menu a[href="#"]') || document.querySelector('.nav-menu a[href="#home"]');
+        } else {
+          activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
+        }
+
+        // Activamos el subrayado
+        if (activeLink) {
+          activeLink.classList.add('active');
+        }
+      }
+    });
+  }, observerOptions);
+
+  // 4. Iniciamos la observación
+  sections.forEach(section => observer.observe(section));
 
 // --- FUNCIONALIDAD DEL CARRUSEL INFINITO DE LOGOS ---
   const logoSlider = document.querySelector(".logo-slider");
