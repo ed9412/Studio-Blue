@@ -459,11 +459,13 @@ img {
 .blue-banner-statement {
   background-color: var(--blue-primary);
   color: #ffffff;
-  padding: 5rem 5%;
+  /* Reducimos el padding superior/inferior de 5rem a 3.5rem */
+  padding: 3.5rem 5%; 
   display: flex;
-  justify-content: center;    /* Centra horizontalmente todo lo que está dentro */
-  align-items: center;        /* Centra verticalmente */
-  min-height: 90vh;           
+  justify-content: center;    
+  align-items: center;        
+  /* Reducimos la altura mínima de 90vh a 60vh (o puedes borrar esta línea por completo si prefieres que se adapte solo al contenido) */
+  min-height: 60vh;           
   width: 100%;
 }
 
@@ -551,6 +553,8 @@ img {
   /* ELIMINADO: Hemos quitado "animation: scroll 60s" y "will-change: transform" porque ahora lo mueve JS */
 }
 
+
+
 /* 1. Contenedor principal (quitamos el transform de aquí) */
 .logo-item {
   display: flex;
@@ -568,22 +572,17 @@ img {
 
 /* 2. La imagen asume el control de la animación */
 .logo-item img {
-  /* Le damos un tamaño base más grande para garantizar la máxima resolución */
-  max-height: 75px; 
-  width: auto;
+  width: 140px;
+  height: 75px;
+  object-fit: contain; /* el logo se ajusta a la caja sin deformarse */
   filter: grayscale(100%);
-  
-  /* La encogemos en su estado normal (equivale a verla a 64px) */
+
   transform: scale(0.85) translateZ(0);
   -webkit-transform: scale(0.85) translateZ(0);
-  
-  /* Optimizaciones anti-desenfoque de máxima prioridad */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
-  will-change: transform, filter; /* Avisa al navegador que esto se va a mover */
-  
-  /* Animación más fluida */
+  will-change: transform, filter;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -732,7 +731,16 @@ img {
 }
 
 .footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* espacio entre icono y texto */
   transition: color 0.3s ease;
+}
+
+.footer-links svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 .footer-links a:hover {
@@ -871,7 +879,16 @@ img {
     object-position: bottom right;
   }
   
+/* --- BANNER STATEMENT (MÓVIL) ESPACIADOS --- */
+  .blue-banner-statement {
+    padding: 2.5rem 5%; /* Mucho menos espacio arriba y abajo en móvil */
+    min-height: auto;   /* Anula la regla de altura mínima para que la caja abrace al contenido */
+  }
 
+  /* También reducimos el espacio entre la imagen y el texto en móvil */
+  .statement-image-container {
+    margin-bottom: 1.5rem !important; /* Originalmente estaba en 3.5rem */
+  }
 
   /* Contenedor de la imagen centrado */
   .about-image {
