@@ -885,21 +885,15 @@ img {
     background-color: transparent;
   }
 
-  /* --- CAJA PROTECTORA DE TEXTO (SOLO EN MÓVILES) --- */
+/* --- TEXTO DE SERVICIOS (MÓVIL) --- */
   .service-text {
-    padding-right: 0; /* En móvil aprovechamos todo el ancho debajo del título */
+    padding-right: 0; /* Mantenemos esto para que el texto aproveche todo el ancho de la pantalla en móvil */
   }
   
   .service-text p {
-    /* Mismo efecto Liquid Glass de la flecha/menú para que sea legible sobre la imagen */
-    background-color: rgba(243, 240, 236, 0.88); 
-    backdrop-filter: blur(15px) saturate(180%);
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-top: 1rem;
-    box-shadow: none;
+    padding: 1.5rem 0 0.5rem 0; /* Devolvemos el espaciado limpio original sin fondos ni bordes */
+    margin: 0;
+    /* Hemos eliminado background, backdrop-filter, border, border-radius y box-shadow */
   }
 
   
