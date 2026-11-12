@@ -290,7 +290,7 @@ img {
 .blue-banner-grid {
   display: grid;
   grid-template-columns: auto auto auto;
-  gap: 0.8rem;
+  gap: 0rem;
   align-items: center;
   justify-content: center;
   max-width: 100%;
@@ -309,18 +309,18 @@ img {
   outline: none;             /* Elimina contornos de enfoque o selección */
   height: auto;
   max-height: 480px;
-  width: 100%;
+  width: 70%;
   object-fit: cover;
   background: transparent;   /* Mantiene el fondo limpio */
 }
 
 /* MANTIENE POSICIONAMIENTO ESCALONADO RESPECTO A TEXTO-SERVICIOS */
 .card-left {
-  transform: translateY(-35px); /* Aumentado ligeramente para compensar el mayor tamaño */
+  transform: translateY(-45px); /* Aumentado ligeramente para compensar el mayor tamaño */
 }
 
 .card-right {
-  transform: translateY(35px);
+  transform: translateY(55px);
 }
 
 /* IMAGEN CENTRAL EN TAMAÑO MÁXIMO */
@@ -332,11 +332,10 @@ img {
 }
 
 .services-text-image img {
-  width: 100%;
-  max-width: 900px;
+  width: auto;        /* la caja se ajusta al tamaño real de la imagen */
+  max-width: 100%;
   height: auto;
   max-height: 82vh;
-  object-fit: contain;
   display: block;
 }
 
