@@ -298,20 +298,21 @@ img {
 
 /* TAMAÑO MÁS GRANDE Y ADAPTATIVO EN PANTALLAS DE PC */
 .photo-card {
-  width: clamp(220px, 22vw, 340px); /* Crece proporcionalmente en monitores medianos/grandes */
+  width: auto;          /* la caja abraza a la imagen */
   flex-shrink: 0;
 }
 
 .photo-card img {
-  border-radius: 0;           /* Elimina las esquinas redondeadas/marco */
-  box-shadow: none;          /* Elimina cualquier sombra exterior */
-  border: none;              /* Asegura que no haya bordes definidos */
-  outline: none;             /* Elimina contornos de enfoque o selección */
+  width: auto;
   height: auto;
+  max-width: clamp(220px, 22vw, 340px);  /* mismo límite de ancho que tenías */
   max-height: 480px;
-  width: 70%;
-  object-fit: cover;
-  background: transparent;   /* Mantiene el fondo limpio */
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
 /* MANTIENE POSICIONAMIENTO ESCALONADO RESPECTO A TEXTO-SERVICIOS */
@@ -335,7 +336,7 @@ img {
   width: auto;        /* la caja se ajusta al tamaño real de la imagen */
   max-width: 100%;
   height: auto;
-  max-height: 82vh;
+  max-height: 80vh;
   display: block;
 }
 
@@ -470,7 +471,7 @@ img {
 
 .statement-wrapper {
   width: 100%;
-  max-width: 1200px; /* Limita el ancho máximo para que no se pegue demasiado a los bordes de pantallas gigantes */
+  max-width: 1600px; /* Limita el ancho máximo para que no se pegue demasiado a los bordes de pantallas gigantes */
   display: flex;
   justify-content: center; /* Garantiza que el contenido interno se mueva al centro */
   margin: 0 auto;          /* Centra automáticamente el envoltorio */
@@ -479,7 +480,7 @@ img {
 /* LA CAJA MAESTRA QUE CONTIENE FOTOS Y TEXTO */
 .statement-content-box {
   width: 100%;
-  max-width: 1000px;       /* Ancho total de tu diseño */
+  max-width: 1350px;       /* Ancho total de tu diseño */
   display: flex;
   flex-direction: column;
   align-items: center;     /* CAMBIO CLAVE: Fuerza a que los elementos internos (como el bloque de texto con su margen) se centren globalmente como un solo bloque */
@@ -510,10 +511,11 @@ img {
 }
 
 .statement-text-wrapper {
-  width: 50%;          /* Ocupa la mitad exacta bajo las imágenes */
-  align-self: flex-start; /* Se alinea con el inicio de la imagen "memorable" */
-  padding-left: 2rem;  /* 👈 AQUÍ CONTROLAS EL MARGEN: Un espacio limpio y responsivo a la izquierda */
-  box-sizing: border-box; /* Asegura que el padding no rompa el ancho del 50% */
+  width: min(500px, 50%);   /* 500px = lo que medía antes (50% de 1000px); en pantallas pequeñas sigue siendo el 50% */
+  align-self: flex-start;
+  margin-left: 5.25%;       /* 👈 alinea el bloque con el borde izquierdo de la foto memorable */
+  padding-left: 0rem;       /* 👈 empuja el texto un poco más a la derecha que la foto */
+  box-sizing: border-box;
 }
 
 /* 4. EL TEXTO SE ALINEA A LA PERFECCIÓN */
@@ -629,7 +631,7 @@ img {
 
 .about-content h2 em {
   font-family: var(--font-serif);
-  font-size: 3.5rem;
+  font-size: clamp(3.5rem, 5vw, 6rem);   /* antes 3.5rem */
   font-weight: 400;
   display: block;
   margin-bottom: 0;
@@ -646,7 +648,7 @@ img {
 }
 
 .about-content p {
-  font-size: 1.10rem;
+  font-size: clamp(0.95rem, 1.3vw, 1.4rem);   /* antes 1.10rem */
   line-height: 1.7;
   color: #333;
   margin-bottom: 2rem;
