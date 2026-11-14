@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_outward" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link href="https://db.onlinewebfonts.com/c/b7b09232cefefacd74fdedd163289bfa?family=Swiss+721+Light" rel="stylesheet">
+  <!-- Precarga de la imagen hero para que empiece a descargarse cuanto antes -->
+  <link rel="preload" as="image" href="img/hero.webp" fetchpriority="high">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -52,7 +54,7 @@
 	</a>
     </div>
     <div class="hero-image">
-      <img src="img/hero.png" alt="Felipe Alfonzo en Studio Blue">
+      <img src="img/hero.webp" alt="Felipe Alfonzo en Studio Blue" width="2789" height="3055" fetchpriority="high" decoding="async" onload="this.classList.add('loaded')">
     </div>
   </section>
 

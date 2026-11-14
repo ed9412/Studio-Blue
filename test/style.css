@@ -270,6 +270,24 @@ img {
   object-fit: contain;        
   object-position: bottom right; /* CAMBIO CLAVE: Ancla la imagen abajo y a la derecha */
   display: block;
+  /* Aparición suave: empieza invisible y se muestra al terminar de cargar */
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hero-image img.loaded {
+  opacity: 1;
+  transform: none;
+}
+
+/* Si JavaScript falla, la imagen se muestra igualmente */
+@media (scripting: none) {
+  .hero-image img { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-image img { transition: none; transform: none; }
 }
 
 /* --- BANNER AZUL DE SERVICIOS --- */

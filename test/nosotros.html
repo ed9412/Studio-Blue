@@ -14,6 +14,9 @@
   <link href="https://db.onlinewebfonts.com/c/b7b09232cefefacd74fdedd163289bfa?family=Swiss+721+Light" rel="stylesheet">
 
   <!-- Base compartida con el landing + estilos propios de esta página -->
+  <!-- Precarga de la foto principal -->
+  <link rel="preload" as="image" href="img/nosotros/sobre-mi-felipe.webp" fetchpriority="high">
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="nosotros.css">
 </head>
@@ -49,7 +52,7 @@
 
       <!-- Foto: PNG recortado (sin fondo). El fondo gris lo pone el CSS. -->
       <div class="nos-about-photo">
-        <img src="img/nosotros/sobre-mi-felipe.png" alt="Felipe Alfonzo, fundador y director creativo de Studio Blue">
+        <img src="img/nosotros/sobre-mi-felipe.webp" alt="Felipe Alfonzo, fundador y director creativo de Studio Blue" width="3456" height="3072" fetchpriority="high" decoding="async" onload="this.classList.add('loaded')">
       </div>
 
       <div class="nos-about-text">

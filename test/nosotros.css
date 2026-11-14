@@ -88,6 +88,24 @@
   max-width: none;
   object-fit: contain;
   object-position: bottom center;
+  /* Aparición suave al terminar de cargar (el translateX mantiene el centrado) */
+  opacity: 0;
+  transform: translate(-50%, 16px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.nos-about-photo img.loaded {
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
+/* Si JavaScript falla, la imagen se muestra igualmente */
+@media (scripting: none) {
+  .nos-about-photo img { opacity: 1; transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nos-about-photo img { transition: none; }
 }
 
 /* ==========================================================================
