@@ -1018,13 +1018,13 @@ img {
   .statement-text-wrapper {
     width: 100% !important;
     padding-left: 0 !important;
-    margin-left: 0 !important;   /* 👈 debe estar */
+    margin-left: 0 !important;   
   }
 
   .statement-desc {
     width: 100%;
     margin-left: 0%;
-    margin-left: 0 !important;   /* 👈 con !important, para ganarle a la regla de PC */
+    margin-left: 0 !important;   
   }
 
 .about-content h2 em .brand-name {
