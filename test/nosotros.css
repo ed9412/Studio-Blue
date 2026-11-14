@@ -14,7 +14,7 @@
 
 /* El texto justificado de este diseño parte palabras con guion */
 .page-nosotros p {
-  hyphens: auto;
+  hyphens: manual;
   -webkit-hyphens: auto;
 }
 
@@ -36,12 +36,17 @@
   grid-area: text;
   display: flex;
   align-items: center;
-  padding: clamp(2rem, 4vw, 4rem) 4% clamp(2rem, 4vw, 4rem) 7.7%;
+  /* Márgenes laterales iguales = bloque centrado en horizontal.
+     Abajo se suma el alto del menú: así el texto queda centrado en la sección
+     completa (menú incluido) y no solo en el panel gris. Quita
+     "+ var(--nos-nav-h)" si prefieres centrarlo respecto al panel gris. */
+  padding: clamp(2rem, 4vw, 4rem) 4% calc(clamp(2rem, 4vw, 4rem) + var(--nos-nav-h)) 4%;
 }
 
 .nos-about-inner {
   width: 100%;
-  max-width: 560px;
+  max-width: 640px;
+  margin: 0 auto; /* centra el bloque dentro de su columna */
 }
 
 .nos-about-inner h1 em {
@@ -54,7 +59,7 @@
 }
 
 .nos-about-inner p {
-  font-size: clamp(0.8rem, 1.05vw, 1rem);
+  font-size: clamp(0.9rem, 1.2vw, 1.12rem);
   line-height: 1.4;
   color: var(--text-dark);
   text-align: justify;
@@ -317,7 +322,7 @@
   }
 
   .nos-about-inner p {
-    font-size: 0.82rem;
+    font-size: 0.92rem;
     text-align: justify;
   }
 
