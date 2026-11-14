@@ -1,24 +1,20 @@
+/* --- FUENTE LOCAL: Swiss 721 Extended (archivo en /fonts) --- */
+@font-face {
+  font-family: 'Swiss 721 Extended BT'; /* mismo nombre que usa nosotros.css */
+  src: url('fonts/Swiss 721 Extended Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* muestra texto enseguida con la fuente de respaldo */
+}
+
 /* --- VARIABLES Y RESET --- */
 :root {
   --blue-primary: #1b1be0;
   --bg-light: #f3f0ec;
   --text-dark: #111111;
   --brand-dark: #0d0d0d;
-
-/* --- REGISTRO DE FUENTE LOCAL --- */
-@font-face {
-  font-family: 'SWISS 721'; /* Nombre con el que llamarás a la fuente */
-  src: url('fonts/Swiss 721 Extended Regular.otf') format('otf'),
-  font-weight: 400; /* Peso normal */
-  font-style: normal;
-  font-display: swap; /* Permite cargar el texto rápido con fuente del sistema mientras descarga la propia */
-}
-
-
-  
-  
-/* Definimos la nueva fuente */
   --font-swiss: "Swiss 721 Light", sans-serif;
+  --font-custom: var(--font-swiss); /* antes no estaba definida; mantiene el aspecto actual */
   --font-serif: 'Instrument Serif', serif;
 }
 
