@@ -230,7 +230,10 @@ document.addEventListener("DOMContentLoaded", () => {
     autoScrollPortfolio(); // Iniciamos el motor
 
     // 4. Pausar al pasar el ratón
-    portSlider.addEventListener("mouseenter", () => isPaused = true);
+    portSlider.addEventListener("mouseenter", () => {
+      isPaused = true;
+      targetScroll = currentScroll; // Iguala las variables y mata el "derrape" al instante
+    });
     portSlider.addEventListener("mouseleave", () => isPaused = false);
 
     // 5. Botones de Navegación Suavizada
